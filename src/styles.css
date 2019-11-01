@@ -40,7 +40,6 @@ body {
   border-radius: 50%;
   border: solid 2px #fff;
   /* box-shadow: -8px 8px 8px 0px #5858588a; */
-  /* animation: circle 3s infinite linear; */
   transform-origin: top left;
 }
 .CDinner {
