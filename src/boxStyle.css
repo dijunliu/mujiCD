@@ -1,0 +1,65 @@
+div {
+  box-sizing: border-box;
+}
+.BoxContent {
+  position: absolute;
+  transform-style: preserve-3d;
+  width: 25rem;
+  height: 25rem;
+  top: 50%;
+  left: 50%;
+  margin: -10rem 0 0 -10rem;
+  transform: rotateY(32.0491rad) rotateX(-0.2441rad);
+}
+.BoxContent > div {
+  position: absolute;
+  background: rgb(234, 234, 234);
+}
+.font {
+  background: none !important;
+}
+.back {
+  background: rgb(148, 148, 148) !important;
+  border-radius: 4rem;
+  box-shadow: -31px 31px 47px -13px #656565;
+  transform-style: preserve-3d;
+}
+.back::before {
+  display: block;
+  content: "";
+  background-image: url(http://www.3dczk.com/uploads/allimg/150611/1-1506111P1020-L.jpg) !important;
+  width: 200rem !important;
+  height: 200rem !important;
+  transform: translateZ(-1.75rem) translate(-50%, -50%) !important;
+}
+.top {
+  top: 0;
+}
+.bottom {
+  bottom: 0;
+}
+.right {
+  right: 0;
+}
+.left,
+.right {
+  transform-style: preserve-3d;
+}
+.leftTop,
+.rightTop {
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+}
+.leftBottom,
+.rightBottom {
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+.curve {
+  position: absolute;
+  width: 100%;
+  background: rgb(234, 234, 234);
+}

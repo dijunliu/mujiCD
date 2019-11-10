@@ -1,18 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: sans-serif;
+  -moz-user-select: none; /*火狐*/
+  -webkit-user-select: none; /*webkit浏览器*/
+  -ms-user-select: none; /*IE10*/
+  -khtml-user-select: none; /*早期浏览器*/
+  user-select: none;
 }
-.app {
-}
-#Front {
-  width: 500px;
-  height: 500px;
-  background-color: #e6e6e6;
-  border-radius: 110px;
+#app {
+  perspective: 800px;
+  position: absolute;
   overflow: hidden;
-  box-shadow: 0 0 0px 4px #e8e8e8, 0 0 3px 3px #dadadad1 inset;
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+}
+#cdPlayer {
+  width: 100%;
+  height: 100%;
+  background-color: #e6e6e6;
+  border-radius: 4rem;
+  overflow: hidden;
+  border: solid 2px #f1f1f1;
+  box-shadow: 0 0 0px 0px #e8e8e8, 0 0 3px 3px #dadadad1 inset;
   position: relative;
-  background-image: radial-gradient(#a7a7a7 27%, #e0e0e0c2 30%, transparent 0%);
-  background-size: 7px 7px;
+  /* background-image: radial-gradient(#a7a7a7 27%, #e0e0e0c2 30%, transparent 0%); */
+  /* background-size: 7px 7px; */
+}
+.cdBg {
+  width: 28rem;
+  height: 4px;
+  position: absolute;
+  top: 50%;
+  left: -23%;
+  background-image: radial-gradient(#a7a7a7 20%, #e0e0e0c2 43%, transparent 0%);
+  background-size: 4px 4px;
 }
 .CDBack {
   width: 80%;
@@ -20,14 +45,14 @@ body {
   background: #e6e6e6;
   background-position: 0% 49%;
   background-size: 12% 43%;
-  background-image: url(./src/CDReader.png);
+  background-image: url(./src/image/CDReader.png);
   background-repeat: no-repeat;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  box-shadow: 1px 0 7px 10px #e6e6e6, -2px 0 7px 2px #6d6d6d82 inset;
+  box-shadow: 1px -1px 6px 0px #969696, -2px 0 7px 2px #6d6d6d82 inset;
 }
 .CD {
   width: 88%;
@@ -39,7 +64,7 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   border: solid 2px #fff;
-  /* box-shadow: -8px 8px 8px 0px #5858588a; */
+  background-size: 100%;
   transform-origin: top left;
 }
 .CDinner {
@@ -68,9 +93,14 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
+  background-size: 100%;
+  background-image: url("./src/image/CDFixed.png");
+}
+.circleInit {
+  animation: circle 3s cubic-bezier(0.8, 0.1, 1, 1);
 }
 .circle {
-  animation: circle 3s infinite linear;
+  animation: circle 1s 3s infinite linear;
 }
 @keyframes circle {
   0% {
