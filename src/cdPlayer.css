@@ -1,0 +1,135 @@
+#cdPlayer {
+  width: 100%;
+  height: 100%;
+  background-color: #e6e6e6;
+  border-radius: 4rem;
+  overflow: hidden;
+  border: solid 2px #f1f1f1;
+  box-shadow: 0 0 0px 0px #e8e8e8, 0 0 3px 3px #dadadad1 inset;
+  position: relative;
+}
+.cdBg {
+  width: 28rem;
+  height: 4px;
+  position: absolute;
+  top: 50%;
+  left: -23%;
+  background-image: radial-gradient(#a7a7a7 20%, #e0e0e0c2 43%, transparent 0%);
+  background-size: 4px 4px;
+}
+.CDBack {
+  width: 80%;
+  height: 80%;
+  background: #e6e6e6;
+  background-position: 0% 49%;
+  background-size: 14% 43%;
+  background-image: url(./src/image/CDReader.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 2px -2px 5px 1px #969696a6, -2px 2px 5px 1px #6d6d6d99 inset;
+}
+.CDBackShadow {
+  width: 80%;
+  height: 80%;
+  box-shadow: 0px 0px 6px 8px #e6e6e6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.CD {
+  width: 88%;
+  height: 88%;
+  background: #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: solid 2px #fff;
+  background-size: 100%;
+  transform-origin: top left;
+}
+.CDShadow {
+  width: 88%;
+  height: 88%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: -5px 3px 8px 1px #414141c9;
+}
+.CDinner {
+  width: 25%;
+  height: 25%;
+  background: #fcfcfc;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: solid 2px #e0e0e0cc;
+  background-image: radial-gradient(
+    transparent 0%,
+    transparent 63%,
+    #7d7d7dcf 64%,
+    65%,
+    transparent 66%
+  );
+}
+.CDFixed {
+  width: 45%;
+  height: 45%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-size: 100%;
+  background-image: url("./src/image/CDFixed.png");
+}
+.circleInit {
+  animation: circle 3s cubic-bezier(0.74, 0.01, 0.68, 0.44);
+}
+.circle {
+  animation: circle 1.8s 3s infinite linear;
+}
+@keyframes circle {
+  0% {
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    transform: rotate(360deg) translate(-50%, -50%);
+  }
+}
+.wall {
+  background: rgb(148, 148, 148) !important;
+  border-radius: 4rem;
+  box-shadow: 0px 0px 3px 1px #76767680;
+  transform-style: preserve-3d;
+}
+.wall::before {
+  display: block;
+  content: "";
+  background-image: url(http://www.3dczk.com/uploads/allimg/150611/1-1506111P1020-L.jpg) !important;
+  width: 200rem !important;
+  height: 200rem !important;
+  transform: translateZ(-1.75rem) translate(-50%, -50%) !important;
+}
+.wall::after {
+  display: block;
+  content: "";
+  border-radius: 4rem;
+  width: 17.5rem;
+  height: 18rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: -21px 8px 17px 1px #6969698f;
+}

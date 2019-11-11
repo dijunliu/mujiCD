@@ -23,13 +23,24 @@ export default function drag(elem) {
     curX = rotates.rotateX;
     curY = rotates.rotateY;
   });
+  let isOK = true;
   screen.addEventListener("mousemove", e => {
-    if (isDrawing) {
-      diffX = x - e.clientX;
-      diffY = y - e.clientY;
-      screen.style.animation = "none";
-      screen.style.transform =
-        "rotateY(" + (diffX + curX) + "deg) rotateX(" + (curY + diffY) + "deg)";
+    if (isOK) {
+      if (isDrawing) {
+        diffX = x - e.clientX;
+        diffY = y - e.clientY;
+        screen.style.animation = "none";
+        screen.style.transform =
+          "rotateY(" +
+          (diffX + curX) +
+          "deg) rotateX(" +
+          (curY + diffY) +
+          "deg)";
+      }
+      setTimeout(function() {
+        isOK = true;
+      }, 16);
+      isOK = false;
     }
   });
   window.addEventListener("mouseup", e => {

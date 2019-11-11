@@ -1,4 +1,4 @@
-const musics = [
+export const musics = [
   {
     id: 0,
     name: "野狼disco",
@@ -37,8 +37,8 @@ export function createCDPlayerBg(num) {
   }
 }
 
-export function rotateCd() {
-  this.className += " circleInit";
+export function rotateCd(elem) {
+  elem.className += " circleInit";
 }
 
 export class CDPlayer {
@@ -46,13 +46,18 @@ export class CDPlayer {
     this.palyer = new Audio(musics[0].audio);
     this.cd = document.getElementsByClassName("CD")[0];
     this.cd.style.backgroundImage = "url(" + musics[0].img + ")";
+    const back = document.getElementsByClassName("back")[0];
+    back.className += " wall";
+    this.isPlay = false;
   }
   play() {
     this.palyer.play();
+    this.isPlay = true;
   }
   next() {
     this.palyer.src = musics[1].audio;
     this.palyer.play();
+    this.isPlay = true;
     this.cd.style.backgroundImage = "url(" + musics[1].img + ")";
   }
 }

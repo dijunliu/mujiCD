@@ -1,0 +1,25 @@
+.pipe,
+.pipeNode {
+  background: none !important;
+}
+.pipe .back,
+.pipe .font {
+  background: none !important;
+}
+.pipe {
+  transform: rotateX(-90deg) translateZ(39rem) translateX(9rem) scale(0.2);
+}
+.pipeNode {
+  transform: rotateX(-90deg) translateZ(39rem) translateX(8rem) scale(0.2);
+  top: 0px;
+}
+.pipe .curve {
+  background: #d9d9d9;
+}
+.pipe .back {
+  box-shadow: -1px -1px 3px 7px #393939d9;
+}
+.pipeNode .back {
+  box-shadow: none;
+  background: #afafaf !important;
+}

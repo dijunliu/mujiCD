@@ -13,25 +13,19 @@ div {
 }
 .BoxContent > div {
   position: absolute;
-  background: rgb(234, 234, 234);
+  background: rgb(217, 217, 217);
 }
 .font {
-  background: none !important;
+  background: rgb(16, 92, 168) !important;
 }
 .back {
-  background: rgb(148, 148, 148) !important;
+  background: rgb(85, 168, 17) !important;
+  /* background: rgb(148, 148, 148) !important;
   border-radius: 4rem;
   box-shadow: -31px 31px 47px -13px #656565;
-  transform-style: preserve-3d;
+  transform-style: preserve-3d; */
 }
-.back::before {
-  display: block;
-  content: "";
-  background-image: url(http://www.3dczk.com/uploads/allimg/150611/1-1506111P1020-L.jpg) !important;
-  width: 200rem !important;
-  height: 200rem !important;
-  transform: translateZ(-1.75rem) translate(-50%, -50%) !important;
-}
+
 .top {
   top: 0;
 }
@@ -61,5 +55,5 @@ div {
 .curve {
   position: absolute;
   width: 100%;
-  background: rgb(234, 234, 234);
+  background: rgb(217, 217, 217);
 }

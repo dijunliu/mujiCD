@@ -1,4 +1,3 @@
-import drag from "./drag.js";
 export default class BOX {
   constructor(w, h, t, p = document.body) {
     this.width = w;
@@ -15,7 +14,6 @@ export default class BOX {
       { name: "right", width: t, height: h }
     ];
     this.createFlat();
-    drag(this.box);
   }
   render() {
     this.renderFlat();
