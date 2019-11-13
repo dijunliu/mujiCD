@@ -41,6 +41,13 @@ export function rotateCd(elem) {
   elem.className += " circleInit";
 }
 
+export function optShadow(className) {
+  const back = document.getElementsByClassName("back wall")[0],
+    s = document.createElement("div");
+  s.className = className;
+  back.appendChild(s);
+}
+
 export class CDPlayer {
   constructor() {
     this.palyer = new Audio(musics[0].audio);

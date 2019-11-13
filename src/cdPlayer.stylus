@@ -1,12 +1,36 @@
+$box-color = rgb(239, 239, 239)
+$radius = 2rem
 #cdPlayer {
   width: 100%;
   height: 100%;
-  background-color: #e6e6e6;
-  border-radius: 4rem;
+  background-color: $box-color;
+  border-radius: $radius;
   overflow: hidden;
   border: solid 2px #f1f1f1;
-  box-shadow: 0 0 0px 0px #e8e8e8, 0 0 3px 3px #dadadad1 inset;
+  box-shadow:0 0 1px 1px rgba(195, 195, 195, 0.71) inset;
   position: relative;
+}
+.left {
+  background: rgb(168, 168, 168) !important;
+}
+.top {
+  background: linear-gradient(
+      180deg,
+      rgba(140, 140, 140, 0.16),
+      rgba(132, 132, 132, 0) 24%
+    ),
+    linear-gradient(90deg, rgb(222, 222, 222), rgba(132, 132, 132, 0) 50%),
+    $box-color !important;
+}
+.right{
+   background: 
+   linear-gradient(90deg, #dedede, rgba(132,132,132,0) 19%),
+    $box-color !important;
+}
+.bottom {
+  background:
+  linear-gradient(176deg, rgba(140, 140, 140, 0.22), rgba(132,132,132,0) 48%),
+  linear-gradient(90deg, #dedede, rgba(132,132,132,0) 50%), #efefef !important;
 }
 .cdBg {
   width: 28rem;
@@ -14,7 +38,7 @@
   position: absolute;
   top: 50%;
   left: -23%;
-  background-image: radial-gradient(#a7a7a7 20%, #e0e0e0c2 43%, transparent 0%);
+  background-image: radial-gradient(#929292 20%, rgba(224,224,224,0.761) 43%, transparent 0%);
   background-size: 4px 4px;
 }
 .CDBack {
@@ -54,6 +78,7 @@
   border: solid 2px #fff;
   background-size: 100%;
   transform-origin: top left;
+  transition: 2s all;
 }
 .CDShadow {
   width: 88%;
@@ -63,7 +88,7 @@
   left: 50%;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: -5px 3px 8px 1px #414141c9;
+  box-shadow: -10px 4px 9px 1px rgba(65, 65, 65, 0.54);
 }
 .CDinner {
   width: 25%;
@@ -98,7 +123,7 @@
   animation: circle 3s cubic-bezier(0.74, 0.01, 0.68, 0.44);
 }
 .circle {
-  animation: circle 1.8s 3s infinite linear;
+  animation: circle 1.4s 3s infinite linear;
 }
 @keyframes circle {
   0% {
@@ -117,7 +142,7 @@
 .wall::before {
   display: block;
   content: "";
-  background-image: url(http://www.3dczk.com/uploads/allimg/150611/1-1506111P1020-L.jpg) !important;
+  background-image: url(http://hituyu.hnbcdn.com/2017030153e9b580095ae809b96f691282d361cd.jpg) !important;
   width: 200rem !important;
   height: 200rem !important;
   transform: translateZ(-1.75rem) translate(-50%, -50%) !important;
@@ -125,11 +150,35 @@
 .wall::after {
   display: block;
   content: "";
-  border-radius: 4rem;
-  width: 17.5rem;
-  height: 18rem;
+  border-radius: 2rem;
+  width: 20rem;
+  height: 19.9rem;
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: -21px 8px 17px 1px #6969698f;
+  box-shadow: -5px 5px 15px 0px #696969e6;
+  transform: skew(0deg, -1deg);
+}
+.optSoftShadom{
+  display: block;
+  content: "";
+  border-radius: 3rem;
+  width: 20rem;
+  height: 19rem;
+  position: absolute;
+  top: 1.1rem;
+  transform: skew(0deg, 1deg);
+  left: 0rem;
+  box-shadow: -54px 10px 29px 12px rgba(105, 105, 105, 0.18)
+}
+.optHardShadom{
+  display: block;
+    content: "";
+    border-radius: 3rem;
+    width: 19rem;
+    height: 16rem;
+    position: absolute;
+    top: 1.1rem;
+    left: 0rem;
+    box-shadow: -20px 15px 29px 16px #5d5d5d94;
 }

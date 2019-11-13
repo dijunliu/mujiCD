@@ -1,18 +1,19 @@
 import "./styles.css";
-import "./boxStyle.css";
-import "./cdPlayer.css";
+import "./boxStyle.stylus";
+import "./cdPlayer.stylus";
 import "./pipe.css";
 import CurveBox from "./CurveBox.js";
 import Pipe from "./Pipe.js";
-import { createCDPlayerBg, CDPlayer } from "./cdPlayer.js";
+import { createCDPlayerBg, CDPlayer, optShadow } from "./cdPlayer.js";
 import drag from "./drag.js";
 import dragPipe from "./dragPipe.js";
 
 const app = document.getElementById("app");
 const cdPlayer = document.getElementById("cdPlayer");
 
-const box = new CurveBox(20, 20, 3.5, app);
-box.addCurve(4, 20);
+const box = new CurveBox(20, 20, 4.5, app);
+box.addCurve(2, 20);
+
 box.DomTexture({ front: cdPlayer });
 box.render();
 //drage cdplayer
@@ -34,9 +35,10 @@ const cd = document.getElementsByClassName("CD")[0];
 const player = new CDPlayer();
 dragPipe(pipeNode.box.box, player);
 
-const left = document.getElementsByClassName("left")[0],
-  top = document.getElementsByClassName("top")[0];
+const top = document.getElementsByClassName("top")[0];
 
+optShadow("optSoftShadom");
+optShadow("optHardShadom");
 top.addEventListener("click", function() {
   const box = document.getElementsByClassName("BoxContent")[0];
   box.style.transform = "rotateX(-60deg)";
@@ -49,7 +51,6 @@ top.addEventListener("click", function() {
     false
   );
 });
-left.addEventListener("click", player.next.bind(player));
 
 cd.addEventListener(
   "animationend",

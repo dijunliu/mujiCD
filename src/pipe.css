@@ -7,7 +7,7 @@
   background: none !important;
 }
 .pipe {
-  transform: rotateX(-90deg) translateZ(39rem) translateX(9rem) scale(0.2);
+  transform: rotateX(-90deg) translateZ(39rem) translateX(9rem) scale(0.1);
 }
 .pipeNode {
   transform: rotateX(-90deg) translateZ(39rem) translateX(8rem) scale(0.2);
@@ -22,4 +22,33 @@
 .pipeNode .back {
   box-shadow: none;
   background: #afafaf !important;
+}
+/* .pipeNode::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2rem;
+  background: #a2a2a266;
+  box-shadow: 0px 0px 10px 0px #a2a2a2cc;
+  top: 0;
+  left: 0;
+  transform: rotateX(-90deg) translateZ(18rem) translateX(-5rem);
+} */
+.pipeNode::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 41rem;
+  background: radial-gradient(
+      6rem 2.3rem,
+      #c5c5c5c2 59%,
+      #c7c7c747 -31%,
+      #ffffff00
+    ),
+    linear-gradient(90deg, #a4ea1b00 20%, #c5c5c5c2, #181dcc00 80%), #ffffff00;
+  top: 0;
+  left: 0;
+  transform: rotateX(-90deg) translateZ(1rem) translateX(-5rem);
 }

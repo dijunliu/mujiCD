@@ -9,15 +9,12 @@ div {
   top: 50%;
   left: 50%;
   margin: -10rem 0 0 -10rem;
-  transform: rotateY(32.0491rad) rotateX(-0.2441rad);
+  transform: rotateY(30deg) rotateX(-37deg) translateY(-7rem);
 }
 .BoxContent > div {
   position: absolute;
-  background: rgb(217, 217, 217);
 }
-.font {
-  background: rgb(16, 92, 168) !important;
-}
+
 .back {
   background: rgb(85, 168, 17) !important;
   /* background: rgb(148, 148, 148) !important;
@@ -55,5 +52,4 @@ div {
 .curve {
   position: absolute;
   width: 100%;
-  background: rgb(217, 217, 217);
 }

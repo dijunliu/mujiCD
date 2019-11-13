@@ -68,13 +68,13 @@ export default function dragPipe(elem, cdPlayer) {
 
         const cd = document.getElementsByClassName("CD")[0];
         rotateCd(cd);
-        cd.addEventListener(
-          "animationend",
-          function() {
-            this.className = "CD circle";
-          },
-          false
-        );
+        // cd.addEventListener(
+        //   "animationend",
+        //   function() {
+        //     this.className = "CD circle";
+        //   },
+        //   false
+        // );
       }
       screen.style.transition = "all 0.5s cubic-bezier(0, 0, 0.05, 0.99) 0s";
       screen.style.top = "0px";

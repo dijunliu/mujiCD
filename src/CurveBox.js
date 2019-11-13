@@ -1,4 +1,5 @@
 import Box from "./Box.js";
+import { _getTransform } from "./tools.js";
 
 export default class CurveBox extends Box {
   constructor(w, h, t, p = document.body) {
@@ -38,8 +39,9 @@ export default class CurveBox extends Box {
     this.radius = radius;
     let angle = Math.PI / (2 * curveNum);
     let width = (2 * radius * Math.sin(angle / 2)).toFixed(2);
-    function renderCurve(ParentElem, dir) {
+    function renderCurve(curveBox, dir) {
       let curvenum = curveNum;
+      curveBox.child = [];
       while (curvenum--) {
         const curve = document.createElement("div");
         curve.className = "curve";
@@ -50,19 +52,55 @@ export default class CurveBox extends Box {
           "deg) translateZ(" +
           -Math.ceil(radius * Math.cos(angle / 2), 2) +
           "rem)";
-        ParentElem.appendChild(curve);
+        curveBox.dom.appendChild(curve);
+        curveBox.child.push(curve);
       }
     }
-    renderCurve(this.curves[0].dom, -1);
-    renderCurve(this.curves[1].dom, 1);
-    renderCurve(this.curves[2].dom, -1);
-    renderCurve(this.curves[3].dom, 1);
+    renderCurve(this.curves[0], -1);
+    renderCurve(this.curves[1], 1);
+    renderCurve(this.curves[2], -1);
+    renderCurve(this.curves[3], 1);
 
     this.moveCurve(radius, width / 2);
     this.changeFB(radius);
     // this.moveFlats();
+    this.addCurveShadow(this.curves[0]);
+    this.addCurveShadow(this.curves[1]);
+    this.addCurveHighlight(this.curves[2]);
+    this.addCurveHighlight(this.curves[3]);
+  }
+  addCurveShadow(curves) {
+    curves.child.map(curve => {
+      let rotate = parseInt(curve.style.transform.split("(")[1].split("d")[0]),
+        grad =
+          "linear-gradient(rgba(144,144,144," +
+          (Math.cos(toRad(rotate) * 1).toFixed(2) * 0.6 + 0.15) +
+          "),rgba(144,144,144," +
+          (Math.cos(toRad(rotate) * 1).toFixed(2) * 0.6 + 0.15) +
+          "))";
+
+      curve.style.background = grad + ",rgb(239, 239, 239)";
+    });
+  }
+  addCurveHighlight(curves) {
+    curves.child.map(curve => {
+      let rotate = parseInt(curve.style.transform.split("(")[1].split("d")[0]),
+        grad =
+          "linear-gradient(rgba(255,255,255," +
+          Math.cos(toRad(rotate) * 1).toFixed(2) * 0.2 +
+          "),rgba(255,255,255," +
+          Math.cos(toRad(rotate) * 1).toFixed(2) * 0.2 +
+          "))";
+
+      curve.style.background = grad + ",rgb(239, 239, 239)";
+      curve.style.background =
+        "linear-gradient(90deg, #dedede, rgba(132,132,132,0) 19%),rgb(239, 239, 239)";
+    });
   }
 }
 function toAngle(rad) {
   return (rad * 180) / Math.PI;
+}
+function toRad(deg) {
+  return (deg * Math.PI) / 180;
 }
