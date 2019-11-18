@@ -36,11 +36,11 @@ export default function drag(elem) {
           "deg) rotateX(" +
           (curY + diffY) +
           "deg) translateY(-7rem)";
+        setTimeout(function() {
+          isOK = true;
+        }, 16);
+        isOK = false;
       }
-      setTimeout(function() {
-        isOK = true;
-      }, 16);
-      isOK = false;
     }
   });
   window.addEventListener("mouseup", e => {

@@ -11,7 +11,7 @@ body {
   user-select: none;
 }
 #app {
-  perspective: 800px;
+  perspective: 1800px;
   position: absolute;
   overflow: hidden;
   width: 100%;

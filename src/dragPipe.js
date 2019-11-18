@@ -65,7 +65,6 @@ export default function dragPipe(elem, cdPlayer) {
         } else {
           cdPlayer.play();
         }
-
         const cd = document.getElementsByClassName("CD")[0];
         rotateCd(cd);
         // cd.addEventListener(

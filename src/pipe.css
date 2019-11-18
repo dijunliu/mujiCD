@@ -2,53 +2,76 @@
 .pipeNode {
   background: none !important;
 }
-.pipe .back,
 .pipe .font {
-  background: none !important;
+  background: #dedede;
 }
 .pipe {
-  transform: rotateX(-90deg) translateZ(39rem) translateX(9rem) scale(0.1);
+  transform: rotateX(-90deg) translateZ(39rem) translateX(9rem)
+    translateY(0.6rem) scale(0.1);
 }
 .pipeNode {
-  transform: rotateX(-90deg) translateZ(39rem) translateX(8rem) scale(0.2);
+  transform: rotateX(-90deg) translateZ(39rem) translateX(8.5rem)
+    translateY(0.6rem) scale(0.2);
   top: 0px;
 }
 .pipe .curve {
   background: #d9d9d9;
 }
-.pipe .back {
-  box-shadow: -1px -1px 3px 7px #393939d9;
-}
 .pipeNode .back {
-  box-shadow: none;
   background: #afafaf !important;
+  border-radius: 2rem !important;
+  width: 4rem !important;
+  height: 4rem !important;
+  top: -8px !important;
+  left: -8px !important;
 }
-/* .pipeNode::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 2rem;
-  background: #a2a2a266;
-  box-shadow: 0px 0px 10px 0px #a2a2a2cc;
-  top: 0;
-  left: 0;
-  transform: rotateX(-90deg) translateZ(18rem) translateX(-5rem);
-} */
+.pipeNode .font {
+  border-radius: 2rem !important;
+  width: 4rem !important;
+  height: 4rem !important;
+  top: -8px !important;
+  left: -8px !important;
+}
 .pipeNode::before {
   content: "";
   display: block;
   position: absolute;
-  width: 100%;
+  width: 141%;
   height: 41rem;
   background: radial-gradient(
-      6rem 2.3rem,
-      #c5c5c5c2 59%,
-      #c7c7c747 -31%,
+      10rem 1.3rem,
+      #e4e4e4 59%,
+      #c7c7c747 84%,
       #ffffff00
     ),
-    linear-gradient(90deg, #a4ea1b00 20%, #c5c5c5c2, #181dcc00 80%), #ffffff00;
+    linear-gradient(90deg, #a4ea1b00 22%, #e4e4e4, #181dcc00 67%), #ababab00;
   top: 0;
   left: 0;
-  transform: rotateX(-90deg) translateZ(1rem) translateX(-5rem);
+  transform: rotateX(-90deg) translateZ(-3rem) translateX(-5rem);
+}
+.pipe .back {
+  width: 6rem !important;
+  height: 23.3rem !important;
+  transform: translateZ(-19.9rem) translateX(-2rem) translateY(-6rem) !important;
+  background: radial-gradient(at 51% 56%, #333333 50%, #bdbdbd) !important;
+  border-radius: 3rem 3rem 0rem 0rem !important;
+}
+.pipe .back::after {
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(0deg, #ababab, #5f5f5f);
+  content: "";
+  bottom: 0;
+  position: absolute;
+  border-radius: 7px 7px 0px 0px;
+}
+.pipeNode .back {
+  border-radius: 2rem !important;
+  width: 4rem !important;
+  height: 4rem !important;
+  transform: translateZ(-1rem) !important;
+  background: #c5c5c5 !important;
+}
+.pipeNode .back::after {
+  content: none !important;
 }
