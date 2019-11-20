@@ -8,8 +8,7 @@ div {
   height: 25rem;
   top: 50%;
   left: 50%;
-  margin: -10rem 0 0 -10rem;
-  transform: rotateX(-63deg) translateZ(29rem) translateY(-50rem);
+  transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 .BoxContent > div {
   position: absolute;

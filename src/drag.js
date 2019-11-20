@@ -19,9 +19,10 @@ export default function drag(elem) {
     let transformValue = window
       .getComputedStyle(screen)
       .getPropertyValue("transform");
+
     rotates = _getTransform(transformValue);
-    curX = rotates.rotateX;
-    curY = rotates.rotateY;
+    curX = isNaN(rotates.rotateX) ? 0 : rotates.rotateX;
+    curY = isNaN(rotates.rotateY) ? 0 : rotates.rotateY;
   });
   let isOK = true;
   screen.addEventListener("mousemove", e => {
@@ -35,7 +36,8 @@ export default function drag(elem) {
           (diffX + curX) +
           "deg) rotateX(" +
           (curY + diffY) +
-          "deg) translateY(-7rem)";
+          "deg) translate(-50%,-50%)";
+
         setTimeout(function() {
           isOK = true;
         }, 16);

@@ -41,10 +41,11 @@
   border-radius: 0.65rem;
   display: flex;
   justify-content: center;
-  box-shadow: -0.3px 0.3px 0.1px 0.5px #00000082,
-    inset 0.4px -0.9px 0.6px 0.5px #6565655e;
+  box-shadow: rgba(0, 0, 0, 0.51) -0.3px 0.3px 0px 0.5px,
+    rgba(101, 101, 101, 0.37) 0.4px -0.9px 0px 0.5px inset;
   align-items: center;
   transition: all 0.1s;
+  cursor: pointer;
 }
 .CLess {
   transform: scale(0.6);
