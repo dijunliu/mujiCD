@@ -8,6 +8,7 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "jsonp": "0.2.1",
     "prefixfree": "1.0.0",
     "stylus": "0.54.7",
     "stylus-loader": "3.0.2"

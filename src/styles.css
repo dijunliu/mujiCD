@@ -24,6 +24,7 @@ body {
   height: 100%;
   background-color: white;
   z-index: 999;
+  transition: 4s all;
 }
 #openingLogo {
   position: absolute;
