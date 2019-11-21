@@ -50,6 +50,8 @@ export default function dragPipe(elem, cdPlayer) {
   });
   window.addEventListener("mouseup", e => {
     var ev = e || window.event;
+    let timer;
+
     if (ev && ev.stopPropagation) {
       //非IE浏览器
       ev.stopPropagation();
@@ -65,15 +67,18 @@ export default function dragPipe(elem, cdPlayer) {
         } else {
           cdPlayer.play();
         }
+        if (timer) {
+          clearTimeout(timer);
+        }
         const cd = document.getElementsByClassName("CD")[0];
-        rotateCd(cd);
-        // cd.addEventListener(
-        //   "animationend",
-        //   function() {
-        //     this.className = "CD circle";
-        //   },
-        //   false
-        // );
+        cd.style.animation = "circle 4s  cubic-bezier(0.74, 0.01, 0.68, 0.44)";
+        cd.addEventListener(
+          "animationend",
+          function() {
+            cd.style.animation = "circle 2s 4s infinite linear";
+          },
+          { once: true }
+        );
       }
       screen.style.transition = "all 0.5s cubic-bezier(0, 0, 0.05, 0.99) 0s";
       screen.style.top = "0px";

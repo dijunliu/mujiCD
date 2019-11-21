@@ -37,13 +37,9 @@ export function createCDPlayerBg(num) {
   }
 }
 
-export function rotateCd(elem) {
-  // elem.className = "CD circleInit";
-
-  elem.style.transition = "2s all";
-  elem.style.transform = "rotate(360deg) translate(-50%, -50%)";
-  console.log(elem.className);
-}
+// export function rotateCd(elem) {
+//   elem.style.animation = "circle 4s cubic-bezier(0.74, 0.01, 0.68, 0.44)";
+// }
 
 export function optShadow(className) {
   const back = document.getElementsByClassName("back wall")[0],
@@ -70,9 +66,10 @@ export class CDPlayer {
     this.modeSwitchButton = document.getElementById("PMode");
     this.volumeUpButton = document.getElementById("VUp");
     this.volumeDownButton = document.getElementById("VDown");
-    this.musicNextButton = document.getElementById("MNext");
-    this.musicPreButton = document.getElementById("MPre");
+    this.NextButton = document.getElementById("MNext");
+    this.PreButton = document.getElementById("MPre");
     this.isPlay = false;
+    this.isCdAnimation = false;
     this.palyer.volume = 0.1;
     this.volume = this.palyer.volume;
     this.musicNum = musics.length;
@@ -86,23 +83,61 @@ export class CDPlayer {
     this.cd.style.backgroundImage = "url(" + musics[0].img + ")";
     const back = document.getElementsByClassName("back")[0];
     back.className += " wall";
-    this.volumeUpButton.addEventListener("click", () => {
-      this.volumeUp();
-    });
-    this.volumeDownButton.addEventListener("click", () => {
-      this.volumeDown();
-    });
-    this.musicNextButton.addEventListener("click", () => {
+    this.addClickEvent(this.volumeUpButton, this.volumeUp.bind(this));
+    this.addClickEvent(this.volumeDownButton, this.volumeDown.bind(this));
+    this.addClickEvent(this.NextButton, this.timeForward.bind(this));
+    this.addClickEvent(this.PreButton, this.timeReturn.bind(this));
+    this.NextButton.addEventListener("dblclick", () => {
+      if (this.timeControlTimer) {
+        clearTimeout(this.timeControlTimer);
+      }
       this.next();
     });
-    this.musicPreButton.addEventListener("click", () => {
+    this.PreButton.addEventListener("dblclick", () => {
+      if (this.timeControlTimer) {
+        clearTimeout(this.timeControlTimer);
+      }
       this.pre();
     });
-    this.modeSwitchButton.addEventListener("click", () => {
+    this.modeSwitchButton.addEventListener("click", e => {
+      this.stopPro(e);
       this.showModeSwitch();
     });
     this.buttonAnimation();
     this.showCdFree();
+  }
+  addClickEvent(elem, fn) {
+    elem.addEventListener("click", e => {
+      this.stopPro(e);
+    });
+    elem.addEventListener("mousedown", e => {
+      const that = this;
+      function volSet() {
+        fn();
+        that.volTimer = setTimeout(volSet, 1000);
+      }
+      volSet();
+    });
+    elem.addEventListener("mouseup", e => {
+      if (this.volTimer) {
+        clearTimeout(this.volTimer);
+      }
+    });
+    elem.addEventListener("mouseout", e => {
+      if (this.volTimer) {
+        clearInterval(this.volTimer);
+      }
+    });
+  }
+  stopPro(e) {
+    var ev = e || window.event;
+    if (ev && ev.stopPropagation) {
+      //非IE浏览器
+      ev.stopPropagation();
+    } else {
+      //IE浏览器(IE11以下)
+      ev.cancelBubble = true;
+    }
   }
   hiddenAllPanel() {
     Array.prototype.map.bind(this.panelDivs)(panelDiv => {
@@ -142,9 +177,9 @@ export class CDPlayer {
     this.hiddenAllPanel();
     this.volControlValue.innerText = Math.round(this.volume * 10);
     this.volControl.style.display = "block";
-    this.timeOut();
+    this.hiddenVol();
   }
-  timeOut() {
+  hiddenVol() {
     if (this.timeOutId) {
       clearTimeout(this.timeOutId);
     }
@@ -152,7 +187,7 @@ export class CDPlayer {
     this.timeOutId = setTimeout(() => {
       that.volControl.style.display = "none";
       that.showCdPlay();
-    }, 1500);
+    }, 1000);
   }
   timeTimer() {
     if (this.timeTimerId) {
@@ -171,6 +206,9 @@ export class CDPlayer {
     this.palyer.play();
     this.showCdPlay();
     this.isPlay = true;
+    if (!this.isCdAnimation) {
+      this.cdAnimation();
+    }
     this.cd.style.backgroundImage =
       "url(" + musics[this.currentMusic].img + ")";
   }
@@ -203,16 +241,44 @@ export class CDPlayer {
     }
     this.showVolControl();
   }
+  timeForward() {
+    if (this.timeControlTimer) {
+      clearTimeout(this.timeControlTimer);
+    }
+    this.timeControlTimer = setTimeout(() => {
+      this.palyer.currentTime += 10;
+    }, 500);
+  }
+  timeReturn() {
+    if (this.timeControlTimer) {
+      clearTimeout(this.timeControlTimer);
+    }
+    this.timeControlTimer = setTimeout(() => {
+      this.palyer.currentTime -= 10;
+    }, 500);
+  }
+  cdAnimation() {
+    const cd = document.getElementsByClassName("CD")[0];
+    cd.style.animation = "circle 4s  cubic-bezier(0.74, 0.01, 0.68, 0.44)";
+    cd.addEventListener(
+      "animationend",
+      function() {
+        cd.style.animation = "circle 2s 4s infinite linear";
+      },
+      { once: true }
+    );
+    this.isCdAnimation = true;
+  }
   buttonAnimation() {
     const Cbuttons = document.getElementsByClassName("Cbutton");
     Array.prototype.map.bind(Cbuttons)(Cbutton => {
       Cbutton.addEventListener("mousedown", () => {
         Cbutton.style.boxShadow =
-          "-0.3px 0.3px 0.1px 0.5px #00000082, inset 0.4px -0.9px 0.6px -1px #6565655e";
+          "rgba(0, 0, 0, 0.51) -0.3px 0.3px 0px 0.5px, rgba(101, 101, 101, 0.37) 0px 0px 0px 0px inset";
       });
       Cbutton.addEventListener("mouseup", () => {
         Cbutton.style.boxShadow =
-          "-0.3px 0.3px 0.1px 0.5px #00000082, inset 0.4px -0.9px 0.6px 0.5px #6565655e";
+          "-0.3px 0.3px 0px 0.5px #00000082, inset 0.4px -0.9px 0px 0.5px #6565655e";
       });
     });
     return true;

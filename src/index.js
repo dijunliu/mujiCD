@@ -5,12 +5,14 @@ import "./boxStyle.stylus";
 import "./cdPlayer.stylus";
 import "./pipe.css";
 import "./controlPanel.css";
+import "./openingAnimation.js";
 import CurveBox from "./CurveBox.js";
 import Pipe from "./Pipe.js";
 import { createCDPlayerBg, CDPlayer, optShadow } from "./cdPlayer.js";
 import drag from "./drag.js";
 import dragPipe from "./dragPipe.js";
 
+document.body.style.display = "block";
 const app = document.getElementById("app"),
   cdPlayer = document.getElementById("cdPlayer"),
   controlPanel = document.getElementById("controlPanel");
@@ -21,7 +23,7 @@ box.addCurve(2, 20);
 box.DomTexture({ front: cdPlayer, top: controlPanel });
 box.render();
 //drage cdplayer
-// drag(box.box);
+drag(box.box);
 //create pipebody
 const cdBox = document.getElementsByClassName("BoxContent")[0];
 const pipe = new Pipe(1, 40, cdBox);
@@ -56,11 +58,3 @@ top.addEventListener("click", function() {
     false
   );
 });
-
-cd.addEventListener(
-  "animationend",
-  function() {
-    this.className = "CD circle";
-  },
-  false
-);
