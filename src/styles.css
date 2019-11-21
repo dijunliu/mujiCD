@@ -29,9 +29,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translateX(-50%) translateY(-50%) scale(2);
-  /* animation: openingAnimationMiddle 1.5s alternate infinite; */
-  animation: openingAnimationStart 2s forwards;
+  transform: translateX(-50%) translateY(-100%) scale(2);
+  animation: openingAnimationStart ease-out 4s forwards;
 }
 @keyframes openingAnimationStart {
   0% {
@@ -40,24 +39,40 @@ body {
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(2);
+    transform: translateX(-50%) translateY(-100%) scale(2);
   }
 }
 @keyframes openingAnimationMiddle {
   0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-100%) scale(2);
+  }
+  20% {
     opacity: 0.1;
+    transform: translateX(-50%) translateY(-100%) scale(2);
   }
-  100% {
+  40% {
     opacity: 1;
+    transform: translateX(-50%) translateY(-100%) scale(2);
   }
-}
-@keyframes openingAnimationEnd {
-  0% {
+  60% {
+    opacity: 0.1;
+    transform: translateX(-50%) translateY(-100%) scale(2);
+  }
+  80% {
     opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(2);
+    transform: translateX(-50%) translateY(-100%) scale(2);
   }
   100% {
     opacity: 0;
     transform: translateX(-50%) translateY(100%) scale(2);
+  }
+}
+@keyframes SlowHidden {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
