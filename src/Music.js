@@ -1,7 +1,12 @@
 import { ERR_OK } from "./api/config.js";
 import { getAlbumDetail, getSingDetail } from "./api/album.js";
 
-class Album {
+const albumIdList = [
+  { name: "Anchor", url: "004HqfCZ23fMjq" },
+  { name: "认了吧", url: "003yQidc3s7P65" }
+];
+
+export class Album {
   constructor(albumId) {
     this.id = albumId;
     this.songUrlList = [];
@@ -37,4 +42,21 @@ class Album {
     });
   }
 }
-const album = new Album("003yQidc3s7P65");
+
+export class AlbumList {
+  constructor(albumIdList) {
+    this.list = [];
+    this.currenAlbumId = 0;
+    this.mapIdList(albumIdList);
+  }
+  mapIdList(albumIdList) {
+    albumIdList.map(albumId => {
+      this.addAlbum(new Album(albumId.url));
+    });
+  }
+  addAlbum(Album) {
+    this.list.push(Album);
+  }
+}
+
+export const albumList = new AlbumList(albumIdList);

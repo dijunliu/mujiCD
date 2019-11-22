@@ -1,27 +1,3 @@
-export const musics = [
-  {
-    id: 0,
-    name: "野狼disco",
-    img:
-      "http://5b0988e595225.cdn.sohucs.com/images/20190924/1945a3a8c7a54d79a7e6e2f3f1b117dd.jpeg",
-    audio: "./src/music/yldisco.m4a"
-  },
-  {
-    id: 1,
-    name: "Drive Time",
-    img:
-      "http://p2.music.126.net/QDswnxhPg0cMmz74sI_1lw==/1695446930032062.jpg?param=130y130",
-    audio: "./src/music/drivetime.m4a"
-  },
-  {
-    id: 2,
-    name: "普通朋友",
-    img:
-      "http://p1.music.126.net/6pIcF4ZAL5euujMUNSt8PQ==/109951164124479906.jpg?param=130y130",
-    audio: "./src/music/ptpy.m4a"
-  }
-];
-
 export function createCDPlayerBg(num) {
   let cdBgsNum = num;
   const cdBgs = document.getElementsByClassName("cdBgs")[0],
@@ -37,10 +13,6 @@ export function createCDPlayerBg(num) {
   }
 }
 
-// export function rotateCd(elem) {
-//   elem.style.animation = "circle 4s cubic-bezier(0.74, 0.01, 0.68, 0.44)";
-// }
-
 export function optShadow(className) {
   const back = document.getElementsByClassName("back wall")[0],
     s = document.createElement("div");
@@ -49,8 +21,14 @@ export function optShadow(className) {
 }
 
 export class CDPlayer {
-  constructor() {
-    this.palyer = new Audio(musics[0].audio);
+  constructor(albumPromise) {
+    albumPromise.then(album => {
+      this.coverImage = album.coverImage;
+      this.musicList = album.songUrlList;
+      this.palyer = new Audio(this.musicList[0].url);
+      this.musicNum = this.musicList.length;
+    });
+
     this.cdFree = document.getElementById("cdFree");
     this.cdFreeValue = this.cdFree.getElementsByClassName("showValue")[0];
     this.cdPlay = document.getElementById("cdPlay");
@@ -70,9 +48,7 @@ export class CDPlayer {
     this.PreButton = document.getElementById("MPre");
     this.isPlay = false;
     this.isCdAnimation = false;
-    this.palyer.volume = 0.1;
-    this.volume = this.palyer.volume;
-    this.musicNum = musics.length;
+    this.volume = 0.1;
     this.currentMusic = 0;
     this.panelDivs = document
       .getElementById("showPanel")
@@ -80,7 +56,7 @@ export class CDPlayer {
   }
   init() {
     this.cd = document.getElementsByClassName("CD")[0];
-    this.cd.style.backgroundImage = "url(" + musics[0].img + ")";
+    this.cd.style.backgroundImage = "url(" + this.coverImage + ")";
     const back = document.getElementsByClassName("back")[0];
     back.className += " wall";
     this.addClickEvent(this.volumeUpButton, this.volumeUp.bind(this));
@@ -202,15 +178,14 @@ export class CDPlayer {
     }, 1000);
   }
   play() {
-    this.palyer.src = musics[this.currentMusic].audio;
+    this.palyer.src = this.musicList[this.currentMusic].url;
     this.palyer.play();
     this.showCdPlay();
     this.isPlay = true;
     if (!this.isCdAnimation) {
       this.cdAnimation();
     }
-    this.cd.style.backgroundImage =
-      "url(" + musics[this.currentMusic].img + ")";
+    this.cd.style.backgroundImage = "url(" + this.coverImage + ")";
   }
   next() {
     if (this.currentMusic < this.musicNum - 1) {

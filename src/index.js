@@ -7,36 +7,12 @@ import "./pipe.css";
 import "./controlPanel.css";
 import "./openingAnimation.js";
 import "./Music.js";
+import { albumList } from "./Music.js";
 import CurveBox from "./CurveBox.js";
 import Pipe from "./Pipe.js";
 import { createCDPlayerBg, CDPlayer, optShadow } from "./cdPlayer.js";
 import drag from "./drag.js";
 import dragPipe from "./dragPipe.js";
-import { ERR_OK } from "./api/config.js";
-import { getAlbumDetail, getSingDetail } from "./api/album.js";
-
-let songInforList = [],
-  songList = [],
-  songUrlList = [];
-
-getAlbumDetail().then(res => {
-  if (res.code === ERR_OK) {
-    songInforList = res.albumSonglist.data.songList;
-    songInforList.map(song => {
-      songList.push({ name: song.songInfo.name, id: song.songInfo.mid });
-    });
-    songList.map(song => {
-      getSingDetail(song.id).then(res => {
-        songUrlList.push({
-          name: song.name,
-          url:
-            "http://ws.stream.qqmusic.qq.com/" +
-            res.req_0.data.midurlinfo[0].purl
-        });
-      });
-    });
-  }
-});
 
 document.body.style.display = "block";
 const app = document.getElementById("app"),
@@ -64,7 +40,13 @@ pipeNode.render();
 
 createCDPlayerBg(90);
 const cd = document.getElementsByClassName("CD")[0];
-const player = new CDPlayer();
+
+const albumPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(albumList.list[0]);
+  }, 1000);
+});
+const player = new CDPlayer(albumPromise);
 player.init();
 dragPipe(pipeNode.box.box, player);
 
