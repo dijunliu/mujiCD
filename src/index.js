@@ -6,8 +6,8 @@ import "./cdPlayer.stylus";
 import "./pipe.css";
 import "./controlPanel.css";
 import "./openingAnimation.js";
-import "./Music.js";
-import { albumList } from "./Music.js";
+// import "./Music.js";
+// import { albumList } from "./Music.js";
 import CurveBox from "./CurveBox.js";
 import Pipe from "./Pipe.js";
 import { createCDPlayerBg, CDPlayer, optShadow } from "./cdPlayer.js";
@@ -41,12 +41,7 @@ pipeNode.render();
 createCDPlayerBg(90);
 const cd = document.getElementsByClassName("CD")[0];
 
-const albumPromise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(albumList.list[0]);
-  }, 1000);
-});
-const player = new CDPlayer(albumPromise);
+const player = new CDPlayer();
 player.init();
 dragPipe(pipeNode.box.box, player);
 

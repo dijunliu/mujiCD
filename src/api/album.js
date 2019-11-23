@@ -1,7 +1,7 @@
 import jsonp from "./jsonp.js";
 import { commonParams, options } from "./config.js";
 
-export function getSingDetail(singerId) {
+export function getSongDetail(singerId) {
   const url = "https://u.y.qq.com/cgi-bin/musicu.fcg";
 
   const data = Object.assign({}, commonParams, {

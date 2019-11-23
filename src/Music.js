@@ -2,8 +2,8 @@ import { ERR_OK } from "./api/config.js";
 import { getAlbumDetail, getSingDetail } from "./api/album.js";
 
 const albumIdList = [
-  { name: "Anchor", url: "004HqfCZ23fMjq" },
-  { name: "认了吧", url: "003yQidc3s7P65" }
+  { name: "Anchor", ID: "004HqfCZ23fMjq" },
+  { name: "认了吧", ID: "003yQidc3s7P65" }
 ];
 
 export class Album {

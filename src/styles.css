@@ -24,7 +24,7 @@ body {
   height: 100%;
   background-color: white;
   z-index: 999;
-  transition: 4s all;
+  transition: 2s all;
 }
 #openingLogo {
   position: absolute;
@@ -76,4 +76,12 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+.albumContent {
+  display: block;
+  width: 75rem;
+  position: absolute;
+  top: 0;
+  left: -40rem;
 }
