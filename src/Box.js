@@ -1,5 +1,6 @@
 export default class BOX {
-  constructor(w, h, t, p = document.body) {
+  constructor(w, h, t, p = document.body, id = "") {
+    this.id = id;
     this.width = w;
     this.height = h;
     this.thickness = t;
@@ -23,6 +24,7 @@ export default class BOX {
   createBox() {
     const box = document.createElement("div");
     box.className = "BoxContent";
+    box.id = this.id;
     box.style.height = this.height + "rem";
     box.style.width = this.width + "rem";
     return box;
@@ -56,6 +58,8 @@ export default class BOX {
         case 0:
           flatDom.style.transform = "translateZ(" + this.thickness / 2 + "rem)";
           if (this.fontTexture) {
+            console.log(this.fontTexture);
+
             flatDom.appendChild(this.fontTexture);
           }
           this.front = flatDom;
@@ -64,8 +68,7 @@ export default class BOX {
           flatDom.style.transform =
             "translateZ(" + -this.thickness / 2 + "rem)";
           if (this.backTexture) {
-            const cloneNode = this.backTexture.cloneNode(true);
-            flatDom.appendChild(cloneNode);
+            flatDom.appendChild(this.backTexture);
           }
           break;
         case 2:
@@ -88,8 +91,7 @@ export default class BOX {
             flatDom.style.left = this.radius + "rem";
           }
           if (this.bottomTexture) {
-            const cloneNode = this.bottomTexture.cloneNode(true);
-            flatDom.appendChild(cloneNode);
+            flatDom.appendChild(this.bottomTexture);
           }
 
           break;
@@ -101,8 +103,7 @@ export default class BOX {
             flatDom.style.top = this.radius + "rem";
           }
           if (this.leftTexture) {
-            const cloneNode = this.leftTexture.cloneNode(true);
-            flatDom.appendChild(cloneNode);
+            flatDom.appendChild(this.leftTexture);
           }
 
           break;
@@ -114,8 +115,7 @@ export default class BOX {
             flatDom.style.top = this.radius + "rem";
           }
           if (this.rightTexture) {
-            const cloneNode = this.rightTexture.cloneNode(true);
-            flatDom.appendChild(cloneNode);
+            flatDom.appendChild(this.rightTexture);
           }
 
           break;

@@ -1,5 +1,6 @@
 import { ERR_OK } from "./api/config.js";
 import { getAlbumDetail, getSongDetail } from "./api/album.js";
+import Box from "./Box.js";
 const albumIdList = [
   { name: "Anchor", ID: "004HqfCZ23fMjq" },
   { name: "认了吧", ID: "003yQidc3s7P65" }
@@ -26,18 +27,50 @@ export function optShadow(className) {
   back.appendChild(s);
 }
 
+// class Album {
+//   constructor(albumId) {
+//     this.Id = albumId;
+//     this.name = "";
+//     this.singerName = "";
+//     this.coverImage = "";
+//     this.songList = [];
+//   }
+//   get length() {
+//     return this.songList.length;
+//   }
+// }
+
 class Album {
-  constructor(albumId) {
-    this.Id = albumId;
-    this.name = "";
-    this.singerName = "";
-    this.coverImage = "";
+  constructor(res) {
+    this.id = res.albumSonglist.data.albumMid;
+    this.songInforList = res.albumSonglist.data.songList;
     this.songList = [];
   }
   get length() {
     return this.songList.length;
   }
+  get name() {
+    return this.songInforList[0].songInfo.album.name;
+  }
+  get singerName() {
+    return this.songInforList[0].songInfo.singer[0].name;
+  }
+  get coverImage() {
+    return (
+      "http://y.gtimg.cn/music/photo_new/T002R300x300M000" +
+      this.id +
+      "_1.jpg?max_age=2592000"
+    );
+  }
+  get singerImage() {
+    return (
+      "https://y.gtimg.cn/music/photo_new/T001R300x300M000" +
+      this.songInforList[0].songInfo.singer[0].mid +
+      ".jpg?max_age=2592000"
+    );
+  }
 }
+
 class Music {
   constructor(id, name, url) {
     this.id = id;
@@ -104,34 +137,34 @@ export class CDPlayer {
     this.buttonAnimation();
     this.showCdFree();
   }
-  getAlbum(albumId) {
-    getAlbumDetail(albumId).then(res => {
-      if (res.code === ERR_OK) {
-        const album = new Album(albumId);
-        let songInforList = res.albumSonglist.data.songList;
-        album.name = songInforList ? songInforList[0].songInfo.album.name : "";
-        album.singerName = songInforList
-          ? songInforList[0].songInfo.singer[0].name
-          : "";
-        album.coverImage =
-          "http://y.gtimg.cn/music/photo_new/T002R300x300M000" +
-          albumId +
-          "_1.jpg?max_age=2592000";
-        songInforList.map(song => {
-          let id = song.songInfo.mid,
-            name = song.songInfo.name;
-          getSongDetail(id).then(res => {
-            let url =
-              "http://ws.stream.qqmusic.qq.com/" +
-              res.req_0.data.midurlinfo[0].purl;
-            const music = new Music(id, name, url);
-            album.songList.push(music);
-          });
-        });
-        this.albumList.push(album);
-      }
-    });
-  }
+  // getAlbum(albumId) {
+  //   getAlbumDetail(albumId).then(res => {
+  //     if (res.code === ERR_OK) {
+  //       const album = new Album(albumId);
+  //       let songInforList = res.albumSonglist.data.songList;
+  //       album.name = songInforList ? songInforList[0].songInfo.album.name : "";
+  //       album.singerName = songInforList
+  //         ? songInforList[0].songInfo.singer[0].name
+  //         : "";
+  //       album.coverImage =
+  //         "http://y.gtimg.cn/music/photo_new/T002R300x300M000" +
+  //         albumId +
+  //         "_1.jpg?max_age=2592000";
+  //       songInforList.map(song => {
+  //         let id = song.songInfo.mid,
+  //           name = song.songInfo.name;
+  //         getSongDetail(id).then(res => {
+  //           let url =
+  //             "http://ws.stream.qqmusic.qq.com/" +
+  //             res.req_0.data.midurlinfo[0].purl;
+  //           const music = new Music(id, name, url);
+  //           album.songList.push(music);
+  //         });
+  //       });
+  //       this.albumList.push(album);
+  //     }
+  //   });
+  // }
   getData(albumIdList) {
     const albumPromises = [];
     albumIdList.map(album => {
@@ -144,28 +177,28 @@ export class CDPlayer {
       wall.appendChild(albumContent);
       responses.map(res => {
         if (res.code === ERR_OK) {
-          let albumId = res.albumSonglist.data.albumMid;
-          const album = new Album(albumId);
-          let songInforList = res.albumSonglist.data.songList;
-          album.name = songInforList
-            ? songInforList[0].songInfo.album.name
-            : "";
-          album.singerName = songInforList
-            ? songInforList[0].songInfo.singer[0].name
-            : "";
-          album.coverImage =
-            "http://y.gtimg.cn/music/photo_new/T002R300x300M000" +
-            albumId +
-            "_1.jpg?max_age=2592000";
+          const album = new Album(res);
+          const cdBox = new Box(1, 1, 1, albumContent, "cdBox");
           const coverImage = document.createElement("img");
+          const test = document.createElement("div");
+          test.id = "test";
+
+          console.log(album.coverImage);
+          test.style.background = "url(" + album.coverImage + ")";
+          test.appendChild(coverImage);
+          cdBox.DomTexture({ front: test });
+          cdBox.render();
+          coverImage.onmousedown = function(e) {
+            e.preventDefault();
+          };
           coverImage.src = album.coverImage;
-          coverImage.className = "AlbumImage";
-          coverImage.id = albumId;
+          coverImage.className = "albumImage";
+          coverImage.id = album.id;
           coverImage.addEventListener("click", e => {
             this.loadAlbum(e);
           });
           albumContent.appendChild(coverImage);
-          songInforList.map(song => {
+          album.songInforList.map(song => {
             let id = song.songInfo.mid,
               name = song.songInfo.name;
             getSongDetail(id).then(res => {
@@ -187,7 +220,7 @@ export class CDPlayer {
     }
     const id = e.target.id,
       album = this.albumList.find(album => {
-        return album.Id === id;
+        return album.id === id;
       });
     this.album = album;
     this.cd.style.backgroundImage = "url(" + this.album.coverImage + ")";
