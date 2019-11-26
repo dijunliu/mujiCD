@@ -35,7 +35,7 @@ export default function drag(elem) {
           (diffX + curX) +
           "deg) rotateX(" +
           (curY + diffY) +
-          "deg) translateY(-7rem)";
+          "deg) translateX(-46rem) translateZ(-10rem)";
         setTimeout(function() {
           isOK = true;
         }, 16);

@@ -9,17 +9,14 @@ div {
   top: 50%;
   left: 50%;
   margin: -10rem 0 0 -10rem;
+  transform:rotateY(0deg) rotateX(-33deg) translateX(-46rem) translateZ(-10rem);
 }
 .BoxContent > div {
   position: absolute;
 }
 
 .back {
-  background: rgb(85, 168, 17) !important;
-  /* background: rgb(148, 148, 148) !important;
-  border-radius: 4rem;
-  box-shadow: -31px 31px 47px -13px #656565;
-  transform-style: preserve-3d; */
+  background: #fff !important;
 }
 
 .top {

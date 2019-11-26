@@ -1,9 +1,39 @@
 import { ERR_OK } from "./api/config.js";
 import { getAlbumDetail, getSongDetail } from "./api/album.js";
 import Box from "./Box.js";
+import CurveBox from "./CurveBox";
 const albumIdList = [
   { name: "Anchor", ID: "004HqfCZ23fMjq" },
-  { name: "认了吧", ID: "003yQidc3s7P65" }
+  { name: "认了吧", ID: "003yQidc3s7P65" },
+  {
+    name: "第二天堂",
+    ID: "000y5gq7449K9I"
+  },
+  {
+    name: "Dramatic",
+    ID: "003xbqA80gmqnt"
+  },
+  { name: "Anniversary BEST", ID: "001VMU9y3qbi7Z" },
+  {
+    name: "Dramatic",
+    ID: "003xbqA80gmqnt"
+  },
+  {
+    name: "无法长大",
+    ID: "000jE4g74VS43p"
+  },
+  {
+    name: "张国荣",
+    ID: "0032Bp8Y0IsARp"
+  },
+  {
+    name: "风继续吹",
+    ID: "002L00ug2SFMBD"
+  },
+  {
+    name: "一个故事",
+    ID: "002bBNhL22UmqQ"
+  }
 ];
 export function createCDPlayerBg(num) {
   let cdBgsNum = num;
@@ -175,29 +205,28 @@ export class CDPlayer {
         albumContent = document.createElement("div");
       albumContent.className = "albumContent";
       wall.appendChild(albumContent);
-      responses.map(res => {
+      responses.map((res, key) => {
         if (res.code === ERR_OK) {
           const album = new Album(res);
-          const cdBox = new Box(1, 1, 1, albumContent, "cdBox");
-          const coverImage = document.createElement("img");
-          const test = document.createElement("div");
-          test.id = "test";
-
-          console.log(album.coverImage);
-          test.style.background = "url(" + album.coverImage + ")";
-          test.appendChild(coverImage);
-          cdBox.DomTexture({ front: test });
+          const cdBox = new Box(11, 10, 1, albumContent, "cdBox");
+          const coverImage = document.createElement("div");
+          coverImage.className = "albumImage";
+          coverImage.id = album.id;
+          coverImage.style.background = "url(" + album.coverImage + ")";
+          cdBox.DomTexture({ front: coverImage });
           cdBox.render();
           coverImage.onmousedown = function(e) {
             e.preventDefault();
           };
-          coverImage.src = album.coverImage;
-          coverImage.className = "albumImage";
-          coverImage.id = album.id;
           coverImage.addEventListener("click", e => {
+            cdBox.box.style.transform = "translateZ(180px)";
             this.loadAlbum(e);
           });
-          albumContent.appendChild(coverImage);
+          albumContent.appendChild(cdBox.box);
+          if ((key + 1) % 5 === 0 || key === responses.length - 1) {
+            const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
+            cdPlatform.render();
+          }
           album.songInforList.map(song => {
             let id = song.songInfo.mid,
               name = song.songInfo.name;
