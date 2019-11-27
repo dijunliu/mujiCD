@@ -28,3 +28,6 @@ export function _getTransform(traf) {
     rotateZ: rotateZ
   };
 }
+export function randomNum(start, end) {
+  return Math.ceil((end - start) * Math.random() - end);
+}

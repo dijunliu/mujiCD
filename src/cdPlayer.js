@@ -2,6 +2,7 @@ import { ERR_OK } from "./api/config.js";
 import { getAlbumDetail, getSongDetail } from "./api/album.js";
 import Box from "./Box.js";
 import CurveBox from "./CurveBox";
+import { randomNum } from "./tools";
 const albumIdList = [
   { name: "Anchor", ID: "004HqfCZ23fMjq" },
   { name: "认了吧", ID: "003yQidc3s7P65" },
@@ -144,6 +145,21 @@ export class CDPlayer {
   init() {
     const back = document.getElementsByClassName("back")[0];
     back.className += " wall";
+    addManual();
+    function addManual() {
+      const content = document.createElement("div");
+      content.id = "manualContent";
+      let pushPinNum = 3;
+      while (pushPinNum--) {
+        const pushPin = document.createElement("div");
+        const paper = document.createElement("div");
+        pushPin.className = "pushPinContent";
+        paper.className = "manualPaper";
+        paper.appendChild(pushPin);
+        content.appendChild(paper);
+      }
+      back.appendChild(content);
+    }
     this.addClickEvent(this.volumeUpButton, this.volumeUp.bind(this));
     this.addClickEvent(this.volumeDownButton, this.volumeDown.bind(this));
     this.addClickEvent(this.NextButton, this.timeForward.bind(this));
@@ -210,11 +226,16 @@ export class CDPlayer {
           const album = new Album(res);
           const cdBox = new Box(11, 10, 1, albumContent, "cdBox");
           const coverImage = document.createElement("div");
+          const randomRotate = randomNum(-18, 18);
           coverImage.className = "albumImage";
           coverImage.id = album.id;
           coverImage.style.background = "url(" + album.coverImage + ")";
           cdBox.DomTexture({ front: coverImage });
           cdBox.render();
+          // cdBox.box.style.transform =
+          //   "rotateY(" +
+          //   randomRotate +
+          //   "deg) rotateX(28deg) translateZ(17px) translateY(17px)";
           coverImage.onmousedown = function(e) {
             e.preventDefault();
           };
@@ -435,6 +456,7 @@ export class CDPlayer {
     });
     return true;
   }
+
   towDigit(timeNum) {
     let num = parseInt(timeNum);
     return num > 9 ? num : "0" + num;
