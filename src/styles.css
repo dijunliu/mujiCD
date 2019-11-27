@@ -198,6 +198,7 @@ body {
   width: 60rem;
   height: 23rem;
   position: absolute;
+  transform-style: preserve-3d;
   top: 0rem;
   left: -65rem;
   display: flex;
@@ -207,7 +208,6 @@ body {
   background: url("http://hituyu.hnbcdn.com/2016091538a6a8d94a46948fdca4d6ee6239ce39.jpg");
   background-size: 26%;
   box-shadow: 0 0 10px 0px #0000004a, inset 0 0 4px 2px #00000075;
-  z-index: 999;
   border: solid 10px transparent;
   border-image: url("http://hituyu.hnbcdn.com/20160915c5f0f51dbd5f8f9d0eabcea943a9a513.jpg")
     30 repeat;
@@ -250,10 +250,15 @@ body {
   background: url(./src/image/Pushpin.png);
   background-size: 100%;
 }
-.pushPinContent::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: #123;
+.pushPinShadow {
+  width: 0.5rem;
+  height: 0.5rem;
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  background: #0000005e;
+  background-size: 100%;
+  border-radius: 50%;
+  transform: translateX(-7px) scale(1.5) scaleY(0.6);
+  filter: blur(2px);
 }

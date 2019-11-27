@@ -152,9 +152,12 @@ export class CDPlayer {
       let pushPinNum = 3;
       while (pushPinNum--) {
         const pushPin = document.createElement("div");
+        const pushPinShadow = document.createElement("div");
         const paper = document.createElement("div");
+        pushPinShadow.className = "pushPinShadow";
         pushPin.className = "pushPinContent";
         paper.className = "manualPaper";
+        paper.appendChild(pushPinShadow);
         paper.appendChild(pushPin);
         content.appendChild(paper);
       }
@@ -226,7 +229,6 @@ export class CDPlayer {
           const album = new Album(res);
           const cdBox = new Box(11, 10, 1, albumContent, "cdBox");
           const coverImage = document.createElement("div");
-          const randomRotate = randomNum(-18, 18);
           coverImage.className = "albumImage";
           coverImage.id = album.id;
           coverImage.style.background = "url(" + album.coverImage + ")";
