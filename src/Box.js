@@ -58,8 +58,6 @@ export default class BOX {
         case 0:
           flatDom.style.transform = "translateZ(" + this.thickness / 2 + "rem)";
           if (this.fontTexture) {
-            console.log(this.fontTexture);
-
             flatDom.appendChild(this.fontTexture);
           }
           this.front = flatDom;

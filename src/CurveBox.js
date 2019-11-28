@@ -2,8 +2,8 @@ import Box from "./Box.js";
 import { _getTransform } from "./tools.js";
 
 export default class CurveBox extends Box {
-  constructor(w, h, t, p = document.body) {
-    super(w, h, t, p);
+  constructor(w, h, t, p = document.body, id) {
+    super(w, h, t, p, id);
     this.curves = [];
     this.createCureveBox(this.flats[4]);
     this.createCureveBox(this.flats[5]);

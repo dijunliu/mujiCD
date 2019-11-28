@@ -1,4 +1,4 @@
-import { _getTransform } from "./tools.js";
+import { getTransform } from "./tools.js";
 
 export default function drag(elem) {
   let x = 0;
@@ -9,7 +9,7 @@ export default function drag(elem) {
   let diffY = 0;
   let isDrawing = false;
 
-  let rotates = {};
+  let transform;
   const screen = elem;
 
   screen.addEventListener("mousedown", e => {
@@ -19,9 +19,9 @@ export default function drag(elem) {
     let transformValue = window
       .getComputedStyle(screen)
       .getPropertyValue("transform");
-    rotates = _getTransform(transformValue);
-    curX = rotates.rotateX;
-    curY = rotates.rotateY;
+    transform = getTransform(e.target);
+    curX = transform.rotate.x;
+    curY = transform.rotate.y;
   });
   let isOK = true;
   screen.addEventListener("mousemove", e => {
@@ -31,11 +31,17 @@ export default function drag(elem) {
         diffY = y - e.clientY;
         screen.style.animation = "none";
         screen.style.transform =
-          "rotateY(" +
-          (diffX + curX) +
-          "deg) rotateX(" +
+          "rotateX(" +
           (curY + diffY) +
-          "deg) translateX(46rem) translateZ(-10rem)";
+          "deg) rotateY(" +
+          (diffX + curX) +
+          "deg) translate3d(" +
+          transform.translate.x +
+          "px," +
+          transform.translate.y +
+          "px," +
+          transform.translate.z +
+          "px)";
         setTimeout(function() {
           isOK = true;
         }, 16);

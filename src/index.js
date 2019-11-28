@@ -5,6 +5,8 @@ import "./boxStyle.stylus";
 import "./cdPlayer.stylus";
 import "./pipe.css";
 import "./controlPanel.css";
+import "./wheelEvent";
+import "./globalControl";
 import "./openingAnimation.js";
 // import "./Music.js";
 // import { albumList } from "./Music.js";
@@ -19,8 +21,10 @@ const app = document.getElementById("app"),
   cdPlayer = document.getElementById("cdPlayer"),
   controlPanel = document.getElementById("controlPanel");
 
-const box = new CurveBox(20, 20, 4.5, app);
+const box = new CurveBox(20, 20, 4.5, app, "contentBox");
 box.addCurve(2, 20);
+box.box.style.transform =
+  "rotateX(0deg) rotateY(0deg) translate3d(-460px, 100px, -100.2px)";
 
 box.DomTexture({ front: cdPlayer, top: controlPanel });
 box.render();
