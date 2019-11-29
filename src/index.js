@@ -5,6 +5,7 @@ import "./boxStyle.stylus";
 import "./cdPlayer.stylus";
 import "./pipe.css";
 import "./controlPanel.css";
+import "./cdArea.css";
 import "./manual.css";
 import "./wheelEvent";
 import "./globalControl";
@@ -49,13 +50,14 @@ const cd = document.getElementsByClassName("CD")[0];
 const player = new CDPlayer();
 player.init();
 dragPipe(pipeNode.box.box, player);
-
-const top = document.getElementsByClassName("top")[0];
-
+const BoxContent = document.getElementById("contentBox");
+//there need optimization "top" element getter
+const top = BoxContent.getElementsByClassName("top")[1];
 optShadow("optSoftShadom");
 optShadow("optHardShadom");
+console.log(top);
 top.addEventListener("click", function() {
-  const box = document.getElementsByClassName("BoxContent")[0];
+  const box = document.getElementById("contentBox");
   box.style.transform = "rotateX(-63deg) translateZ(29rem) translateY(-50rem)";
   box.style.transition = "all 2s";
   box.addEventListener(

@@ -145,6 +145,9 @@ export class CDPlayer {
     addManual();
     function addManual() {
       const content = document.createElement("div");
+      const manualBox = new Box(60, 23, 2, content, "manualBox");
+      manualBox.render();
+      const manualBoxFont = manualBox.flats[0].dom;
       content.id = "manualContent";
       let pushPinNum = 3;
       while (pushPinNum--) {
@@ -156,7 +159,7 @@ export class CDPlayer {
         paper.className = "manualPaper";
         paper.appendChild(pushPinShadow);
         paper.appendChild(pushPin);
-        content.appendChild(paper);
+        manualBoxFont.appendChild(paper);
       }
       back.appendChild(content);
     }
@@ -239,7 +242,9 @@ export class CDPlayer {
             e.preventDefault();
           };
           coverImage.addEventListener("click", e => {
-            cdBox.box.style.transform = "translateZ(180px)";
+            cdBox.box.style.transform =
+              "translateZ(180px) rotateY(180deg) rotateX(-30deg)";
+            cdBox.box.getElementsByClassName("bottom")[0].className += " none";
             this.loadAlbum(e);
           });
           albumContent.appendChild(cdBox.box);
