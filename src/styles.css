@@ -157,7 +157,8 @@ body {
 }
 #cdPlatform .back {
   width: 65rem;
-  box-shadow: 1px 28px 20px 9px #00000036, -2px 10px 13px 5px #00000059;
+  box-shadow: 1px 28px 20px 9px #00000036, -15px 3px 15px 2px #00000036,
+    -2px 10px 13px 5px #00000059;
   height: 1rem;
   transform: translateZ(-4rem) scale(0.98) skewX(-12deg) !important;
 }
@@ -203,7 +204,7 @@ body {
   left: -65rem;
   display: flex;
   justify-content: space-evenly;
-  align-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
   background: url("http://hituyu.hnbcdn.com/2016091538a6a8d94a46948fdca4d6ee6239ce39.jpg");
   background-size: 26%;
@@ -216,6 +217,7 @@ body {
   position: relative;
   width: 25%;
   height: 83%;
+  box-shadow: 0px -3px 6px -5px #0000006b;
   background: url("https://www.toptal.com/designers/subtlepatterns/patterns/ricepaper2.png");
 }
 .manualPaper::after,

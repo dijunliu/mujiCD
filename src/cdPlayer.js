@@ -6,10 +6,7 @@ import { randomNum } from "./tools";
 const albumIdList = [
   { name: "Anchor", ID: "004HqfCZ23fMjq" },
   { name: "认了吧", ID: "003yQidc3s7P65" },
-  {
-    name: "第二天堂",
-    ID: "000y5gq7449K9I"
-  },
+  { name: "我们", ID: "003PnsTL0OwBuZ" },
   {
     name: "Dramatic",
     ID: "003xbqA80gmqnt"

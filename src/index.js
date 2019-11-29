@@ -5,6 +5,7 @@ import "./boxStyle.stylus";
 import "./cdPlayer.stylus";
 import "./pipe.css";
 import "./controlPanel.css";
+import "./manual.css";
 import "./wheelEvent";
 import "./globalControl";
 import "./openingAnimation.js";
@@ -24,7 +25,7 @@ const app = document.getElementById("app"),
 const box = new CurveBox(20, 20, 4.5, app, "contentBox");
 box.addCurve(2, 20);
 box.box.style.transform =
-  "rotateX(0deg) rotateY(0deg) translate3d(-460px, 100px, -100.2px)";
+  "rotateX(0deg) rotateY(0deg) translate3d(660px, 100px, -200.2px)";
 
 box.DomTexture({ front: cdPlayer, top: controlPanel });
 box.render();
