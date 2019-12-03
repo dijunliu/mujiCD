@@ -63,10 +63,13 @@
   border: solid 1px #9a9a9a47;
 }
 #cdBox .back {
-  background: rgba(255, 255, 255, 0.5) !important;
   box-shadow: 0 -0.2em 1em rgba(0, 0, 0, 0.15),
     0 0.2em 0.1em -5px rgba(0, 0, 0, 0.3),
     0 -0.75em 1.75em rgba(254, 254, 254, 0.6);
+  transform: translateZ(-0.5rem) rotateY(180deg) !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
+  background-position: 50% !important;
 }
 #cdPlatform {
   height: 1rem;
@@ -116,4 +119,16 @@
 }
 #cdPlatform .top::after {
   background: #0000001c linear-gradient(180deg, #00000045, transparent);
+}
+.cdBack {
+  background: #ffffff70;
+  font-size: 11px;
+  padding: 0.5rem;
+  transform: scale(0.5) translateX(-45%) translateY(-50%);
+  position: absolute;
+  min-width: 100%;
+  width: max-content;
+  max-width: 180%;
+  top: 1rem;
+  border-left: solid 0.1rem #fff;
 }

@@ -15,7 +15,7 @@ div {
 }
 
 .back {
-  background: #fff !important;
+  background: #fff;
 }
 
 .top {

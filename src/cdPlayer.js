@@ -7,31 +7,13 @@ const albumIdList = [
   { name: "Anchor", ID: "004HqfCZ23fMjq" },
   { name: "认了吧", ID: "003yQidc3s7P65" },
   { name: "我们", ID: "003PnsTL0OwBuZ" },
-  {
-    name: "Dramatic",
-    ID: "003xbqA80gmqnt"
-  },
+  { name: "Dramatic", ID: "003xbqA80gmqnt" },
   { name: "Anniversary BEST", ID: "001VMU9y3qbi7Z" },
-  {
-    name: "Dramatic",
-    ID: "003xbqA80gmqnt"
-  },
-  {
-    name: "无法长大",
-    ID: "000jE4g74VS43p"
-  },
-  {
-    name: "张国荣",
-    ID: "0032Bp8Y0IsARp"
-  },
-  {
-    name: "风继续吹",
-    ID: "002L00ug2SFMBD"
-  },
-  {
-    name: "一个故事",
-    ID: "002bBNhL22UmqQ"
-  }
+  { name: "Dramatic", ID: "003xbqA80gmqnt" },
+  { name: "无法长大", ID: "000jE4g74VS43p" },
+  { name: "张国荣", ID: "0032Bp8Y0IsARp" },
+  { name: "风继续吹", ID: "002L00ug2SFMBD" },
+  { name: "一个故事", ID: "002bBNhL22UmqQ" }
 ];
 export function createCDPlayerBg(num) {
   let cdBgsNum = num;
@@ -73,6 +55,7 @@ class Album {
     this.id = res.albumSonglist.data.albumMid;
     this.songInforList = res.albumSonglist.data.songList;
     this.songList = [];
+    this._songList = [];
   }
   get length() {
     return this.songList.length;
@@ -232,8 +215,7 @@ export class CDPlayer {
           coverImage.className = "albumImage";
           coverImage.id = album.id;
           coverImage.style.background = "url(" + album.coverImage + ")";
-          cdBox.DomTexture({ front: coverImage });
-          cdBox.render();
+
           // cdBox.box.style.transform =
           //   "rotateY(" +
           //   randomRotate +
@@ -242,8 +224,10 @@ export class CDPlayer {
             e.preventDefault();
           };
           coverImage.addEventListener("click", e => {
+            // const cdBox = document.getElementsByClassName("albumContent")[0]
+            //   .childNodes;
             cdBox.box.style.transform =
-              "translateZ(180px) rotateY(180deg) rotateX(-30deg)";
+              "translateZ(880px) rotateY(180deg) rotateX(-30deg)";
             cdBox.box.getElementsByClassName("bottom")[0].className += " none";
             this.loadAlbum(e);
           });
@@ -252,9 +236,12 @@ export class CDPlayer {
             const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
             cdPlatform.render();
           }
+          cdBox.flats[1].dom.style.background =
+            "url(" + album.singerImage + ")";
           album.songInforList.map(song => {
             let id = song.songInfo.mid,
               name = song.songInfo.name;
+            album._songList.push(name);
             getSongDetail(id).then(res => {
               let url =
                 "http://ws.stream.qqmusic.qq.com/" +
@@ -263,6 +250,18 @@ export class CDPlayer {
               album.songList.push(music);
             });
           });
+
+          const cdBack = document.createElement("div");
+          cdBack.className = "cdBack";
+
+          album._songList.map(song => {
+            const songLi = document.createElement("p");
+            songLi.innerText = "·" + song;
+            songLi.className = "songLi";
+            cdBack.appendChild(songLi);
+          });
+          cdBox.DomTexture({ front: coverImage, back: cdBack });
+          cdBox.render();
           this.albumList.push(album);
         }
       });

@@ -11,9 +11,9 @@ import "./wheelEvent";
 import "./globalControl";
 import "./openingAnimation.js";
 // import "./Music.js";
-// import { albumList } from "./Music.js";
 import CurveBox from "./CurveBox.js";
 import Pipe from "./Pipe.js";
+//import cdPlayer object
 import { createCDPlayerBg, CDPlayer, optShadow } from "./cdPlayer.js";
 import drag from "./drag.js";
 import dragPipe from "./dragPipe.js";
@@ -26,7 +26,7 @@ const app = document.getElementById("app"),
 const box = new CurveBox(20, 20, 4.5, app, "contentBox");
 box.addCurve(2, 20);
 box.box.style.transform =
-  "rotateX(0deg) rotateY(0deg) translate3d(660px, 100px, -200.2px)";
+  "rotateX(0deg) rotateY(0deg) translate3d(-660px, 100px, -200.2px)";
 
 box.DomTexture({ front: cdPlayer, top: controlPanel });
 box.render();
@@ -55,7 +55,6 @@ const BoxContent = document.getElementById("contentBox");
 const top = BoxContent.getElementsByClassName("top")[1];
 optShadow("optSoftShadom");
 optShadow("optHardShadom");
-console.log(top);
 top.addEventListener("click", function() {
   const box = document.getElementById("contentBox");
   box.style.transform = "rotateX(-63deg) translateZ(29rem) translateY(-50rem)";
