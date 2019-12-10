@@ -151,7 +151,7 @@ $radius = 2rem
   background-image: url("http://hituyu.hnbcdn.com/20160915a43bfce19159d572415f9fe97a7161e7.png") !important;
   width: 200rem !important;
   height: 200rem !important;
-  transform: translateZ(-1.75rem) translate(-50%, -50%) !important;
+  transform: translateZ(-1.75rem) translate(-40%, -50%) !important;
   opacity: 0.8;
 }
 .wall::after {

@@ -1,6 +1,7 @@
 import { ERR_OK } from "./api/config.js";
 import { getAlbumDetail, getSongDetail } from "./api/album.js";
 import Box from "./Box.js";
+import analyze from "rgbaster";
 import CurveBox from "./CurveBox";
 import { randomNum } from "./tools";
 const albumIdList = [
@@ -210,7 +211,7 @@ export class CDPlayer {
       responses.map((res, key) => {
         if (res.code === ERR_OK) {
           const album = new Album(res);
-          const cdBox = new Box(11, 10, 1, albumContent, "cdBox");
+          const cdBox = new Box(11, 10, 1, albumContent, "", "cdBox");
           const coverImage = document.createElement("div");
           coverImage.className = "albumImage";
           coverImage.id = album.id;
@@ -223,21 +224,30 @@ export class CDPlayer {
           coverImage.onmousedown = function(e) {
             e.preventDefault();
           };
+          // cdBox.box.addEventListener("mouseover", e => {
+          //   cdBox.box.style.transform =
+          //     "rotateX(28deg) translateZ(17px) translateY(-20px)";
+          // });
+          // cdBox.box.addEventListener("mouseout", e => {
+          //   cdBox.box.style.transform =
+          //     "rotateX(28deg) translateZ(17px) translateY(17px)";
+          // });
           coverImage.addEventListener("click", e => {
             // const cdBox = document.getElementsByClassName("albumContent")[0]
             //   .childNodes;
+            const cdBoxs = document.getElementsByClassName("cdBox");
+
+            Array.prototype.map.bind(cdBoxs)(Box => {
+              Box.style.transform =
+                "rotateX(28deg) translateZ(17px) translateY(17px)";
+            });
             cdBox.box.style.transform =
-              "translateZ(880px) rotateY(180deg) rotateX(-30deg)";
+              "translateZ(880px) rotateY(180deg) rotateX(0deg)";
             cdBox.box.getElementsByClassName("bottom")[0].className += " none";
             this.loadAlbum(e);
           });
           albumContent.appendChild(cdBox.box);
-          if ((key + 1) % 5 === 0 || key === responses.length - 1) {
-            const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
-            cdPlatform.render();
-          }
-          cdBox.flats[1].dom.style.background =
-            "url(" + album.singerImage + ")";
+
           album.songInforList.map(song => {
             let id = song.songInfo.mid,
               name = song.songInfo.name;
@@ -250,18 +260,40 @@ export class CDPlayer {
               album.songList.push(music);
             });
           });
-
-          const cdBack = document.createElement("div");
-          cdBack.className = "cdBack";
-
-          album._songList.map(song => {
-            const songLi = document.createElement("p");
-            songLi.innerText = "·" + song;
-            songLi.className = "songLi";
-            cdBack.appendChild(songLi);
+          function addCdBack() {
+            const cdBack = document.createElement("div");
+            const background = document.createElement("div");
+            const musicList = document.createElement("div");
+            cdBack.className = "cdBackContent";
+            background.className = "cdBackgroud";
+            background.style.background = "url(" + album.singerImage + ")";
+            musicList.className = "cdBack";
+            album._songList.map(song => {
+              const songLi = document.createElement("p");
+              songLi.innerText = song;
+              songLi.className = "songList";
+              musicList.appendChild(songLi);
+            });
+            cdBack.appendChild(background);
+            cdBack.appendChild(musicList);
+            return cdBack;
+          }
+          function addCdLeft() {
+            const cdLeft = document.createElement("div");
+            cdLeft.className = "cdLeft";
+            cdLeft.innerText = album.name;
+            return cdLeft;
+          }
+          cdBox.DomTexture({
+            front: coverImage,
+            back: addCdBack(),
+            left: addCdLeft()
           });
-          cdBox.DomTexture({ front: coverImage, back: cdBack });
           cdBox.render();
+          if ((key + 1) % 5 === 0 || key === responses.length - 1) {
+            const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
+            cdPlatform.render();
+          }
           this.albumList.push(album);
         }
       });

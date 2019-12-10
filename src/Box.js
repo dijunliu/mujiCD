@@ -1,6 +1,7 @@
 export default class BOX {
-  constructor(w, h, t, p = document.body, id = "") {
+  constructor(w, h, t, p = document.body, id = "", className = "") {
     this.id = id;
+    this.className = className;
     this.width = w;
     this.height = h;
     this.thickness = t;
@@ -25,6 +26,7 @@ export default class BOX {
     const box = document.createElement("div");
     box.className = "BoxContent";
     box.id = this.id;
+    box.className += " " + this.className;
     box.style.height = this.height + "rem";
     box.style.width = this.width + "rem";
     return box;

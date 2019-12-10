@@ -1,3 +1,9 @@
+.cdBackgroud {
+  width: 100%;
+  height: 100%;
+  background-size: cover !important;
+  filter: blur(9px);
+}
 .albumContent {
   width: 65rem;
   position: absolute;
@@ -14,15 +20,25 @@
   height: 10rem;
   background-size: 100% !important;
   border: solid 1px #fff;
+  position: relative;
+  overflow: hidden;
 }
 .albumImage::after {
   content: "";
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: linear-gradient(35deg, #ffffff38 51%, transparent 52%);
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 33%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(229, 172, 142, 0) 77%
+  );
+  transform: rotateZ(21deg) translate(-1em, 3.48em);
+  transition: 1s all;
 }
-#cdBox {
+.cdBox {
   transform-style: preserve-3d;
   width: 25rem;
   height: 25rem;
@@ -32,10 +48,25 @@
   margin-bottom: 1px;
   transform: rotateX(28deg) translateZ(17px) translateY(17px);
 }
-#cdBox .bottom {
+.albumImage:hover::after {
+  transform: rotateZ(21deg) translate(-1em, -2.52em);
+}
+.cdBox:hover .bottom::after {
+  box-shadow: none;
+}
+.cdBox:hover {
+  transform: rotateX(8deg) translateZ(17px) translateY(-20px);
+}
+
+@keyframes sheen {
+  100% {
+    transform: rotateZ(21deg) translate(-1em, -2.52em);
+  }
+}
+.cdBox .bottom {
   transform-style: preserve-3d;
 }
-#cdBox .bottom::after {
+.cdBox .bottom::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -43,33 +74,43 @@
   transform: rotateX(-28deg) translateY(-2px) skewX(1deg) scale(0.85);
   box-shadow: -8px -20px 18px 5px #00000066, 0px -37px 17px 20px #00000061;
 }
-#cdBox .bottom.none::after {
+.cdBox .bottom.none::after {
   content: none;
 }
-#cdBox .font {
+.cdBox .font {
   width: 10.1rem;
   height: 10rem;
   transform: translateZ(0.5rem);
   border-left: solid 1rem rgba(255, 255, 255, 0.5);
 }
-#cdBox .top,
-#cdBox .bottom {
+.cdBox .top,
+.cdBox .bottom {
   border-left: solid 1rem rgba(255, 255, 255, 0.5);
   border: solid 1px #9a9a9a47;
 }
 
-#cdBox .left {
-  background: rgba(255, 255, 255, 0.5) !important;
+.cdBox .left {
+  transform: rotateY(-90deg) translateZ(0.5rem) !important;
+  writing-mode: vertical-rl;
+  background: #fff !important;
   border: solid 1px #9a9a9a47;
 }
-#cdBox .back {
+.cdBox .cdLeft {
+  width: 100%;
+  letter-spacing: 0.1rem;
+  color: #000;
+  font-size: 0.1rem;
+  font-weight: bold;
+  border-top: solid 2px #8a0101;
+  padding-top: 5px;
+  transform: scale(0.7);
+}
+
+.cdBox .back {
   box-shadow: 0 -0.2em 1em rgba(0, 0, 0, 0.15),
     0 0.2em 0.1em -5px rgba(0, 0, 0, 0.3),
     0 -0.75em 1.75em rgba(254, 254, 254, 0.6);
   transform: translateZ(-0.5rem) rotateY(180deg) !important;
-  background-size: 100% !important;
-  background-repeat: no-repeat !important;
-  background-position: 50% !important;
 }
 #cdPlatform {
   height: 1rem;
@@ -120,15 +161,33 @@
 #cdPlatform .top::after {
   background: #0000001c linear-gradient(180deg, #00000045, transparent);
 }
+.cdBackContent {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .cdBack {
-  background: #ffffff70;
+  background: #ffffff;
   font-size: 11px;
-  padding: 0.5rem;
-  transform: scale(0.5) translateX(-45%) translateY(-50%);
+  padding: 0.8rem;
+  transform: scale(0.5) translateX(-41%) translateY(-50%);
   position: absolute;
-  min-width: 100%;
+  min-width: 95%;
   width: max-content;
-  max-width: 180%;
+  max-width: 167%;
   top: 1rem;
-  border-left: solid 0.1rem #fff;
+  min-height: 160%;
+  border-left: solid 0.3rem #000;
+}
+
+.songList:nth-child(odd) {
+  margin-bottom: 2px;
+  color: #000000;
+  border-bottom: solid 2px #000000;
+  font-weight: bold;
+}
+.songList:nth-child(even) {
+  margin-bottom: 2px;
+  color: #940505;
+  border-bottom: solid 1px #940505;
 }
