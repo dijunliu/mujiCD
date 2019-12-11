@@ -51,12 +51,10 @@
 .albumImage:hover::after {
   transform: rotateZ(21deg) translate(-1em, -2.52em);
 }
-.cdBox:hover .bottom::after {
-  box-shadow: none;
-}
-.cdBox:hover {
+
+/* .cdBox:hover {
   transform: rotateX(8deg) translateZ(17px) translateY(-20px);
-}
+} */
 
 @keyframes sheen {
   100% {
@@ -66,14 +64,14 @@
 .cdBox .bottom {
   transform-style: preserve-3d;
 }
-.cdBox .bottom::after {
+/* .cdBox .bottom::after {
   content: "";
   width: 100%;
   height: 100%;
   display: block;
   transform: rotateX(-28deg) translateY(-2px) skewX(1deg) scale(0.85);
   box-shadow: -8px -20px 18px 5px #00000066, 0px -37px 17px 20px #00000061;
-}
+} */
 .cdBox .bottom.none::after {
   content: none;
 }
@@ -190,4 +188,19 @@
   margin-bottom: 2px;
   color: #940505;
   border-bottom: solid 1px #940505;
+}
+.shadowContent {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+}
+.platformShadow {
+  width: 11rem;
+  height: 1.5rem;
+  background: #0000007a;
+  filter: blur(7px);
+  transform: scaleY(2) translateY(1rem);
+  transition: 1s all;
 }

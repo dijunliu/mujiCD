@@ -4,6 +4,7 @@ import Box from "./Box.js";
 import analyze from "rgbaster";
 import CurveBox from "./CurveBox";
 import { randomNum } from "./tools";
+import { log } from "util";
 const albumIdList = [
   { name: "Anchor", ID: "004HqfCZ23fMjq" },
   { name: "认了吧", ID: "003yQidc3s7P65" },
@@ -211,7 +212,14 @@ export class CDPlayer {
       responses.map((res, key) => {
         if (res.code === ERR_OK) {
           const album = new Album(res);
-          const cdBox = new Box(11, 10, 1, albumContent, "", "cdBox");
+          const cdBox = new Box(
+            11,
+            10,
+            1,
+            albumContent,
+            "cdBox" + key,
+            "cdBox"
+          );
           const coverImage = document.createElement("div");
           coverImage.className = "albumImage";
           coverImage.id = album.id;
@@ -224,17 +232,36 @@ export class CDPlayer {
           coverImage.onmousedown = function(e) {
             e.preventDefault();
           };
-          // cdBox.box.addEventListener("mouseover", e => {
-          //   cdBox.box.style.transform =
-          //     "rotateX(28deg) translateZ(17px) translateY(-20px)";
-          // });
-          // cdBox.box.addEventListener("mouseout", e => {
-          //   cdBox.box.style.transform =
-          //     "rotateX(28deg) translateZ(17px) translateY(17px)";
-          // });
+
+          cdBox.box.addEventListener("mouseover", e => {
+            const shadow = document.getElementById(
+              "platformShadow" + cdBox.box.id.slice(-1)
+            );
+            shadow.style.transform = "scaleY(0.8) translateY(2rem)";
+            shadow.style.opacity = "0.5";
+            cdBox.box.addEventListener("mouseout", handleMouseout);
+            cdBox.box.style.transform =
+              "rotateX(8deg) translateZ(17px) translateY(-20px)";
+          });
+          function handleMouseout() {
+            const shadow = document.getElementById(
+              "platformShadow" + cdBox.box.id.slice(-1)
+            );
+            shadow.style.transform = "scaleY(2) translateY(1rem)";
+            shadow.style.opacity = "1";
+
+            cdBox.box.style.transform =
+              "rotateX(28deg) translateZ(17px) translateY(17px)";
+          }
+          cdBox.box.addEventListener("mouseout", handleMouseout);
           coverImage.addEventListener("click", e => {
             // const cdBox = document.getElementsByClassName("albumContent")[0]
             //   .childNodes;
+            const shadow = document.getElementById(
+              "platformShadow" + cdBox.box.id.slice(-1)
+            );
+            shadow.style.opacity = "0";
+            cdBox.box.removeEventListener("mouseout", handleMouseout);
             const cdBoxs = document.getElementsByClassName("cdBox");
 
             Array.prototype.map.bind(cdBoxs)(Box => {
@@ -290,10 +317,22 @@ export class CDPlayer {
             left: addCdLeft()
           });
           cdBox.render();
-          if ((key + 1) % 5 === 0 || key === responses.length - 1) {
-            const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
-            cdPlatform.render();
+          function addPlatform() {
+            if ((key + 1) % 5 === 0 || key === responses.length - 1) {
+              const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
+              const shadowContent = document.createElement("div");
+              shadowContent.className = "shadowContent";
+              for (let i = key - 4; i < key + 1; i++) {
+                const shadow = document.createElement("div");
+                shadow.className = "platformShadow";
+                shadow.id = "platformShadow" + i;
+                shadowContent.appendChild(shadow);
+              }
+              cdPlatform.DomTexture({ top: shadowContent });
+              cdPlatform.render();
+            }
           }
+          addPlatform();
           this.albumList.push(album);
         }
       });
