@@ -15,7 +15,7 @@ import CurveBox from "./CurveBox.js";
 import Pipe from "./Pipe.js";
 //import cdPlayer object
 import { createCDPlayerBg, CDPlayer, optShadow } from "./cdPlayer.js";
-import drag from "./drag.js";
+import { drag } from "./drag.js";
 import dragPipe from "./dragPipe.js";
 
 document.body.style.display = "block";

@@ -36,7 +36,7 @@
     rgba(229, 172, 142, 0) 77%
   );
   transform: rotateZ(21deg) translate(-1em, 3.48em);
-  transition: 1s all;
+  transition: 0.5s all;
 }
 .cdBox {
   transform-style: preserve-3d;
@@ -92,6 +92,7 @@
   writing-mode: vertical-rl;
   background: #fff !important;
   border: solid 1px #9a9a9a47;
+  overflow: hidden;
 }
 .cdBox .cdLeft {
   width: 100%;

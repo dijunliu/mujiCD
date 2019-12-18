@@ -1,6 +1,9 @@
 div {
   box-sizing: border-box;
 }
+#contentBox{
+  transition:0.5s all;
+}
 .BoxContent {
   position: absolute;
   transform-style: preserve-3d;
