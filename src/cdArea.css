@@ -1,3 +1,7 @@
+.cdContent {
+  transform-style: preserve-3d;
+  position: relative;
+}
 .cdBackgroud {
   width: 100%;
   height: 100%;
@@ -52,10 +56,20 @@
   transform: rotateZ(21deg) translate(-1em, -2.52em);
 }
 
-/* .cdBox:hover {
+.cdBox:hover {
   transform: rotateX(8deg) translateZ(17px) translateY(-20px);
-} */
-
+}
+.cdContent:hover .platformShadow {
+  transform: rotateX(69deg) translate3d(0, 47px, 10px) scaleY(0.5);
+  filter: blur(3px);
+  opacity: 0.5;
+}
+.cdBoxClick1 {
+  transform: translateZ(880px) translateY(-5rem) rotateY(180deg) rotateX(0deg) !important ;
+}
+.cdBoxClick2 {
+  transform: translateZ(880px) translateY(-15rem) rotateY(180deg) rotateX(0deg) !important;
+}
 @keyframes sheen {
   100% {
     transform: rotateZ(21deg) translate(-1em, -2.52em);
@@ -202,6 +216,8 @@
   height: 1.5rem;
   background: #0000007a;
   filter: blur(7px);
-  transform: scaleY(2) translateY(1rem);
+  transform: rotateX(69deg) translate3d(0, 47px, 10px);
   transition: 1s all;
+  position: absolute;
+  bottom: 0;
 }

@@ -212,8 +212,8 @@ export class CDPlayer {
       albumContent.className = "albumContent";
       const contentBox = document.getElementById("contentBox");
       albumContent.addEventListener("mouseenter", () => {
-        contentBox.style.transform =
-          "rotateX(-10deg) rotateY(0deg) translate3d(-748px, 0px, -200.2px)";
+        // contentBox.style.transform =
+        //   "rotateX(-10deg) rotateY(0deg) translate3d(-748px, 0px, -200.2px)";
         window.removeEventListener("mousemove", screenRotate);
       });
       albumContent.addEventListener("mouseleave", () => {
@@ -223,14 +223,13 @@ export class CDPlayer {
       responses.map((res, key) => {
         if (res.code === ERR_OK) {
           const album = new Album(res);
-          const cdBox = new Box(
-            11,
-            10,
-            1,
-            albumContent,
-            "cdBox" + key,
-            "cdBox"
-          );
+          const cdContent = document.createElement("div");
+          const platformShadow = document.createElement("div");
+          cdContent.className = "cdContent";
+          platformShadow.className = "platformShadow";
+          const cdBox = new Box(11, 10, 1, cdContent, "cdBox" + key, "cdBox");
+          cdContent.appendChild(platformShadow);
+          albumContent.appendChild(cdContent);
           const coverImage = document.createElement("div");
           coverImage.className = "albumImage";
           coverImage.id = album.id;
@@ -244,47 +243,56 @@ export class CDPlayer {
             e.preventDefault();
           };
           function handleMouseover() {
-            const shadow = document.getElementById(
-              "platformShadow" + cdBox.box.id.slice(-1)
-            );
-            shadow.style.transform = "scaleY(0.8) translateY(2rem)";
-            shadow.style.opacity = "0.5";
-            cdBox.box.style.transform =
-              "rotateX(8deg) translateZ(17px) translateY(-20px)";
+            // const shadow = document.getElementById(
+            //   "platformShadow" + cdBox.box.id.slice(-1)
+            // );
+            // shadow.style.transform = "scaleY(0.8) translateY(2rem)";
+            // shadow.style.opacity = "0.5";
+            // cdBox.box.style.transform =
+            //   "rotateX(8deg) translateZ(17px) translateY(-20px)";
           }
-          cdBox.box.addEventListener("mouseover", handleMouseover);
+          // cdBox.box.addEventListener("mouseover", handleMouseover);
           function handleMouseout() {
-            const shadow = document.getElementById(
-              "platformShadow" + cdBox.box.id.slice(-1)
-            );
-            shadow.style.transform = "scaleY(2) translateY(1rem)";
-            shadow.style.opacity = "1";
-
-            cdBox.box.style.transform =
-              "rotateX(28deg) translateZ(17px) translateY(17px)";
+            // const shadow = document.getElementById(
+            //   "platformShadow" + cdBox.box.id.slice(-1)
+            // );
+            // shadow.style.transform = "scaleY(2) translateY(1rem)";
+            // shadow.style.opacity = "1";
+            // cdBox.box.style.transform =
+            //   "rotateX(28deg) translateZ(17px) translateY(17px)";
           }
-          cdBox.box.addEventListener("mouseout", handleMouseout);
+          // cdBox.box.addEventListener("mouseout", handleMouseout);
           cdBox.box.addEventListener("click", e => {
             // const cdBox = document.getElementsByClassName("albumContent")[0]
             //   .childNodes;
-            const shadow = document.getElementById(
-              "platformShadow" + cdBox.box.id.slice(-1)
-            );
-            shadow.style.opacity = "0";
-            cdBox.box.removeEventListener("mouseout", handleMouseout);
-            cdBox.box.removeEventListener("mouseover", handleMouseover);
+            // const shadow = document.getElementById(
+            //   "platformShadow" + cdBox.box.id.slice(-1)
+            // );
+            // shadow.style.opacity = "0";
+            // cdBox.box.removeEventListener("mouseout", handleMouseout);
+            // cdBox.box.removeEventListener("mouseover", handleMouseover);
             // cdBox.box.addEventListener("mouseout", handleMouseout, false);
 
             const cdBoxs = document.getElementsByClassName("cdBox");
-
+            const shadowDom = cdBox.box.parentNode.children[0];
             Array.prototype.map.bind(cdBoxs)(Box => {
-              Box.style.transform =
-                "rotateX(28deg) translateZ(17px) translateY(17px)";
-              Box.addEventListener("mouseout", handleMouseout);
-              Box.addEventListener("mouseover", handleMouseover);
+              if (Box.classList.contains("cdBoxClick1")) {
+                Box.classList.remove("cdBoxClick1");
+                const shadowDom = Box.parentNode.children[0];
+                shadowDom.classList.add("platformShadow");
+              } else if (Box.classList.contains("cdBoxClick2")) {
+                Box.classList.remove("cdBoxClick2");
+                const shadowDom = Box.parentNode.children[0];
+                shadowDom.classList.add("platformShadow");
+              }
             });
-            cdBox.box.style.transform =
-              "translateZ(880px) rotateY(180deg) rotateX(0deg)";
+            shadowDom.classList.remove("platformShadow");
+            if ((key + 1) / 5 <= 1) {
+              cdBox.box.classList.add("cdBoxClick1");
+            } else {
+              cdBox.box.classList.add("cdBoxClick2");
+            }
+
             cdBox.box.getElementsByClassName("bottom")[0].className += " none";
             this.loadAlbum(e);
           });
@@ -335,15 +343,6 @@ export class CDPlayer {
           function addPlatform() {
             if ((key + 1) % 5 === 0 || key === responses.length - 1) {
               const cdPlatform = new Box(65, 1, 8, albumContent, "cdPlatform");
-              const shadowContent = document.createElement("div");
-              shadowContent.className = "shadowContent";
-              for (let i = key - 4; i < key + 1; i++) {
-                const shadow = document.createElement("div");
-                shadow.className = "platformShadow";
-                shadow.id = "platformShadow" + i;
-                shadowContent.appendChild(shadow);
-              }
-              cdPlatform.DomTexture({ top: shadowContent });
               cdPlatform.render();
             }
           }

@@ -59,9 +59,9 @@ export function drag(elem) {
   curY = transform.rotateY;
 
   window.addEventListener("mousemove", screenRotate);
-  // window.addEventListener("mouseup", e => {
-  //   if (isDrawing) {
-  //     isDrawing = false;
-  //   }
-  // });
+  window.addEventListener("mouseup", e => {
+    if (isDrawing) {
+      isDrawing = false;
+    }
+  });
 }
